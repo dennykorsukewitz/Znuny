@@ -1,0 +1,48 @@
+---
+name: Coverage
+
+# Controls when the action will run.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  Coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Install Devel::Cover
+        run: apt-get install -y libdevel-cover-perl
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run Coverage for UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --exclude-directory Selenium" - otrs
+          su -c "cover" - otrs

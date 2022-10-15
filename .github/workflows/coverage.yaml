@@ -3,6 +3,8 @@ name: Coverage
 
 # Controls when the action will run.
 on:
+  push:
+  pull_request:
   workflow_dispatch:
   schedule:
     - cron:  '0 0 * * *'

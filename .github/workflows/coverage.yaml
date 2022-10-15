@@ -43,8 +43,9 @@ jobs:
       - name: Setup Znuny
         run: .github/workflows/ci/setup.sh
 
+          # su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --exclude-directory Selenium" - otrs
       - name: Run Coverage for UnitTests
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --exclude-directory Selenium" - otrs
+          su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --test scripts/test/ACL/DB/ACL --test scripts/test/ACL/DB/ACLImport" - otrs
           su -c "cover" - otrs

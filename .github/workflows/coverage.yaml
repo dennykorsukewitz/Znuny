@@ -39,7 +39,7 @@ jobs:
 
       - name: Install Devel::Cover and Devel::Cover::Report::Clover
         run: |
-          apt-get install -y libdevel-cover-perl libdevel-cover-report-clover-perl
+          apt-get install -y libdevel-cover-perl
 
       - name: Setup Znuny
         run: .github/workflows/ci/setup.sh

@@ -5,6 +5,7 @@
     <br>
     <a href="https://github.com/znuny/Znuny/actions"><img src="https://img.shields.io/github/workflow/status/znuny/Znuny/CI?label=ci&color=brightgreen"></a>
     <a href="https://github.com/znuny/Znuny/actions"><img src="https://badge.proxy.znuny.com/Znuny/rel-6_4"></a>
+    <a href='https://coveralls.io/github/dennykorsukewitz/Znuny?branch=dev'><img src='https://coveralls.io/repos/github/dennykorsukewitz/Znuny/badge.svg?branch=dev' alt='Coverage Status' /></a>
     <a href="https://translations.znuny.org/engage/znuny/"><img src="https://translations.znuny.org/widgets/znuny/-/znuny/svg-badge.svg" alt="Translation status"></a>
     <br>
     <a href="https://github.com/znuny/Znuny/issues"><img src="https://img.shields.io/github/issues-raw/znuny/Znuny?"></a>

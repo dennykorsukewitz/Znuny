@@ -37,8 +37,9 @@ jobs:
       - name: Install dependencies
         run: .github/workflows/ci/dependencies.sh
 
-      - name: Install Devel::Cover
-        run: apt-get install -y libdevel-cover-perl
+      - name: Install Devel::Cover and Devel::Cover::Report::Clover
+        run: |
+          apt-get install -y libdevel-cover-perl libdevel-cover-report-clover-perl
 
       - name: Setup Znuny
         run: .github/workflows/ci/setup.sh
@@ -49,3 +50,11 @@ jobs:
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
           su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --test scripts/test/ACL/DB/ACL --test scripts/test/ACL/DB/ACLImport" - otrs
           su -c "cover" - otrs
+          su -c "cover -report clover" - otrs
+
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+

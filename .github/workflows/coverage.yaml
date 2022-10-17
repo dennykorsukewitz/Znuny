@@ -47,6 +47,8 @@ jobs:
 
           # su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --exclude-directory Selenium" - otrs
       - name: Run Coverage for UnitTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
           su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --test scripts/test/ACL/DB/ACL --test scripts/test/ACL/DB/ACLImport" - otrs

@@ -41,6 +41,7 @@ jobs:
         run: |
           apt-get install -y libdevel-cover-perl
           cpanm -i Devel::Cover::Report::Clover
+          cpanm -i Devel::Cover::Report::Coveralls
 
       - name: Setup Znuny
         run: .github/workflows/ci/setup.sh
@@ -52,7 +53,7 @@ jobs:
           su -c "perl -MDevel::Cover=+ignore,Kernel/cpan-lib,-silent,1 bin/otrs.Console.pl Dev::UnitTest::Run --test scripts/test/ACL/DB/ACL --test scripts/test/ACL/DB/ACLImport" - otrs
           su -c "cover" - otrs
           su -c "cover -report clover" - otrs
-
+          su -c "cover -report coveralls" - otrs
 
       - name: Coveralls
         uses: coverallsapp/github-action@master

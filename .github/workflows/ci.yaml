@@ -39,7 +39,7 @@ jobs:
 
       - name: Prepare code policy
         run: |
-          cpanm Code::TidyAll Perl::Critic
+          cpanm -i Algorithm::Diff Code::TidyAll Perl::Critic Perl::Tidy Pod::POM XML::Parser
           codepolicy/bin/znuny.CodePolicy.pl --install
 
       - name: Run code policy

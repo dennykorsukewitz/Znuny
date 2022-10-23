@@ -9,7 +9,7 @@ on:
 jobs:
   Merged:
     # this job will only run if the PR has been merged
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && $GITHUB_BASE_REF
     runs-on: ubuntu-latest
     env:
       CURL_DATA: ${{ secrets.CURL_DATA }}

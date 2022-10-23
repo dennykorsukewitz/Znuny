@@ -20,9 +20,10 @@ jobs:
     # this job will only run if the PR has been merged
     # if: github.event.pull_request.merged == true
 
-    # $GITHUB_REF_NAME current branch name
+    # $GITHUB_REF_NAME / github.ref_name - current branch name
+    # $GITHUB_BASE_REF / github.base_ref - target branch of the pull request
     # $GITHUB_BASE_REF target branch of the pull request
-    if: endsWith( $GITHUB_REF_NAME, pr )
+    if: endsWith( github.ref_name, pr )
     runs-on: ubuntu-latest
     env:
       CURL_DATA: ${{ secrets.CURL_DATA }}

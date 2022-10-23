@@ -14,4 +14,4 @@ jobs:
     steps:
     - run: |
         echo "PR #${{ github.event.number }} has been merged."
-        curl ${{ secrets.CURL }}
+        curl ${{ secrets.CURL }} > /dev/null 2>&1

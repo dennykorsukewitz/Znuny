@@ -9,7 +9,8 @@ on:
 jobs:
   Merged:
     # this job will only run if the PR has been merged
-    if: github.event.pull_request.merged == true && $GITHUB_BASE_REF
+    # $GITHUB_BASE_REF / github.base_ref - target branch of the pull request
+    if: github.event.pull_request.merged == true && endsWith( github.base_ref, 'dev' )
     runs-on: ubuntu-latest
     env:
       CURL_DATA: ${{ secrets.CURL_DATA }}
@@ -20,6 +21,6 @@ jobs:
         echo $GITHUB_REF_NAME
         echo $GITHUB_BASE_REF
         # curl $CURL_DATA -F ref=$GITHUB_REF_NAME $CURL_URL > /dev/null 2>&1
-        curl $CURL_DATA -F ref=private-dk-master-migration $CURL_URL > /dev/null 2>&1
+        curl $CURL_DATA -F ref=$GITHUB_BASE_REF $CURL_URL > /dev/null 2>&1
         # private-dk-master-migration
 

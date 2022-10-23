@@ -15,14 +15,22 @@ on:
 
 jobs:
   ENV:
+
+
     # this job will only run if the PR has been merged
     # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      CURL_DATA: ${{ secrets.CURL_DATA }}
+      CURL_URL: ${{ secrets.CURL_URL }}
     steps:
     - run: |
         echo $GITHUB_REF_NAME
         echo $GITHUB_BASE_REF
-        # curl ${{ secrets.CURL }} > /dev/null 2>&1
+        # curl $CURL_DATA -F ref=$GITHUB_REF_NAME $CURL_URL > /dev/null 2>&1
+        curl $CURL_DATA -F ref=private-dk-master-migration $CURL_URL > /dev/null 2>&1
+        # private-dk-master-migration
+
 
 
 # jobs:

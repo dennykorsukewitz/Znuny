@@ -647,3 +647,4 @@ jobs:
 #           path: |
 #             /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
 #           if-no-files-found: ignore
+

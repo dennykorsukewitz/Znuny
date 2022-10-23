@@ -28,7 +28,7 @@ jobs:
         echo $GITHUB_REF_NAME
         echo $GITHUB_BASE_REF
         # curl $CURL_DATA -F ref=$GITHUB_REF_NAME $CURL_URL > /dev/null 2>&1
-        curl $CURL_DATA -F ref=private-dk-master-migration $CURL_URL > /dev/null 2>&1
+        # curl $CURL_DATA -F ref=private-dk-master-migration $CURL_URL > /dev/null 2>&1
         # private-dk-master-migration
 
 

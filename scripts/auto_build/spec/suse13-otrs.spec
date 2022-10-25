@@ -12,6 +12,8 @@
 # "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate". All changes will be lost.
 #
 
+test
+
 Summary:      The Znuny service desk.
 Name:         znuny
 Version:      0.0

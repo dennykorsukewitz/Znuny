@@ -4,9 +4,7 @@
 # ----------------------------------------------------------
 #  insert into table valid
 # ----------------------------------------------------------
-INSERT INTO valid (id, name, create_by, create_time, change_by, change_time)
-    VALUES
-    (1, 'valid', 1, current_timestamp, 1, current_timestamp);
+
 # ----------------------------------------------------------
 #  insert into table valid
 # ----------------------------------------------------------

@@ -95,6 +95,8 @@ sub Run {
 
     $SysConfigObject->DeleteZZZAAutoBackup();
 
+    print "\n $SuccessfulMigration \n";
+
     return $SuccessfulMigration;
 }
 

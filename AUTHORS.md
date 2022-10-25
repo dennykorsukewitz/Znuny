@@ -1,6 +1,5 @@
 The following persons contributed to Znuny:
 
-* 1soproni <csaba@sopron.hu>
 * Alex Kantchev <ak@otrs.com>
 * Alex Mazur <alex.mazur@otrs.com>
 * Alexandre D. Rogoski <alexandre@exatati.com.br>

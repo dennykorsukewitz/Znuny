@@ -1,7 +1,6 @@
 # ----------------------------------------------------------
 #  driver: mysql
 # ----------------------------------------------------------
-SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'acl' AND constraint_name = 'FK_acl_create_by_id');
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE acl ADD CONSTRAINT FK_acl_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_acl_create_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;
 EXECUTE FKStatement;

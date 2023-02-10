@@ -998,7 +998,7 @@ Compares dates and returns a value suitable for using Perl's sort function (-1, 
 
 You can also use this as a function for Perl's sort:
 
-    my @SortedDateTimeObjects = sort { $a->Compare( DateTimeObject => $b ); } @UnsortedDateTimeObjects:
+    my @SortedDateTimeObjects = sort { $a->Compare( DateTimeObject => $b ); } @UnsortedDateTimeObjects;
 
 Returns:
 

@@ -88,6 +88,8 @@ Specify the connection details in C<Config.pm>, like this:
         },
     };
 
+    my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+
 Then you can use the full API of L<Selenium::Remote::Driver> on this object.
 
 =cut

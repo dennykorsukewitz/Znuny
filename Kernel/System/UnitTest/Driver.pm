@@ -37,7 +37,7 @@ Kernel::System::UnitTest::Driver - unit test file execution wrapper
 
 create unit test driver object. Do not use it directly, instead use:
 
-    my $Driver = $Kernel::OM->Create(
+    my $DriverObject = $Kernel::OM->Create(
         'Kernel::System::UnitTest::Driver',
         ObjectParams => {
             Verbose => $Self->{Verbose},

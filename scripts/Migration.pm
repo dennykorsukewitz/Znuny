@@ -249,6 +249,14 @@ sub _TasksGet {
             Message => 'Integrate Znuny-NoteToLinkedTicket',
             Module  => 'scripts::Migration::Znuny::IntegrateZnunyNoteToLinkedTicket',
         },
+        {
+            Message => 'Migrate groups',
+            Module  => 'scripts::Migration::Znuny::MigrateGroups',
+        },
+        {
+            Message => 'Cleanup orphaned mentions',
+            Module  => 'scripts::Migration::Znuny::CleanupOrphanedMentions',
+        },
 
         # NOTE: UninstallMergedPackages has to be called only after
         # SysConfig settings of the merged packages have been migrated.

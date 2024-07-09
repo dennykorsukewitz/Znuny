@@ -15,7 +15,6 @@ use strict;
 use warnings;
 
 use Time::HiRes ();
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::System::Main',
@@ -212,6 +211,10 @@ sub _TasksGet {
         {
             Message => 'Check database charset',
             Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
+        },
+        {
+            Message => 'Check database default storage engine',
+            Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
         },
         {
             Message => 'Check required Perl modules',

@@ -235,7 +235,6 @@ sub Run {
             Data       => \%Databases,
             Name       => 'DBType',
             Class      => 'Modernize',
-            Size       => scalar keys %Databases,
             SelectedID => 'mysql',
         );
 
@@ -1252,6 +1251,14 @@ sub CheckDBRequirements {
                     'https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html',
                 );
             }
+        }
+        else {
+            $Result{Successful} = 0;
+            $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                "Wrong default storage engine (%s is %s, but it needs to be InnoDB).",
+                'default_storage_engine',
+                $DefaultStorageEngine,
+            );
         }
 
         # Check character_set_database value.

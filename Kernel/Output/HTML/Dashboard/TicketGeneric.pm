@@ -1941,7 +1941,7 @@ sub Run {
                     $BlockType = 'Translatable';
                     $DataValue = $Ticket{$Column};
                 }
-                elsif ( $Column eq 'Created' || $Column eq 'Changed' ) {
+                elsif ( $Column eq 'Created' || $Column eq 'Changed' || $Column eq 'LastMention' ) {
                     $BlockType = 'Time';
                     $DataValue = $Ticket{$Column};
                 }
@@ -2040,6 +2040,7 @@ sub Run {
                         Name => 'ContentLargeTicketGenericDynamicFieldLink',
                         Data => {
                             Value                       => $ValueStrg->{Value},
+                            ValueKey                    => $Value,
                             Title                       => $ValueStrg->{Title},
                             Link                        => $ValueStrg->{Link},
                             $DynamicFieldConfig->{Name} => $ValueStrg->{Title},

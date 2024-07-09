@@ -30,6 +30,7 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
+    'Kernel::System::Util',
 );
 
 sub new {
@@ -277,7 +278,7 @@ sub Run {
     if ( IsHashRefWithData($PreviewArticleSenderTypes) ) {
 
         KEY:
-        for my $Key ( %{$PreviewArticleSenderTypes} ) {
+        for my $Key ( sort keys %{$PreviewArticleSenderTypes} ) {
             next KEY if !$PreviewArticleSenderTypes->{$Key};
 
             my $ID = $ArticleObject->ArticleSenderTypeLookup( SenderType => $Key );
@@ -1066,6 +1067,7 @@ sub _Show {
                 Name => 'DynamicFieldTableRowRecordLink',
                 Data => {
                     Value                       => $ValueStrg->{Value},
+                    ValueKey                    => $Value,
                     Title                       => $ValueStrg->{Title},
                     Link                        => $ValueStrg->{Link},
                     $DynamicFieldConfig->{Name} => $ValueStrg->{Title},

@@ -92,7 +92,7 @@ sub EditFieldRender {
     }
 
     # check and set class if necessary
-    my $FieldClass = 'DynamicFieldText Modernize';
+    my $FieldClass = 'DynamicFieldDropdown Modernize';
     if ( defined $Param{Class} && $Param{Class} ne '' ) {
         $FieldClass .= ' ' . $Param{Class};
     }
@@ -149,35 +149,28 @@ sub EditFieldRender {
             . $TreeSelectionMessage . '</span><i class="fa fa-sitemap"></i></a>';
     }
 
-    if ( $Param{Mandatory} ) {
-        my $DivID = $FieldName . 'Error';
-
-        my $FieldRequiredMessage = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
-
-        # for client side validation
-        $HTMLString .= <<"EOF";
-<div id="$DivID" class="TooltipErrorMessage">
+    # Tooltip for client side validation
+    my $ClientErrorTooltipDivID = $FieldName . 'Error';
+    my $FieldRequiredMessage    = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
+    $HTMLString .= <<"EOF";
+<div id="$ClientErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $FieldRequiredMessage
     </p>
 </div>
 EOF
-    }
 
-    if ( $Param{ServerError} ) {
-        my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
-        $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
-        my $DivID = $FieldName . 'ServerError';
-
-        # for server side validation
-        $HTMLString .= <<"EOF";
-<div id="$DivID" class="TooltipErrorMessage">
+    # Tooltip for server side validation
+    my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
+    $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
+    my $ServerErrorTooltipDivID = $FieldName . 'ServerError';
+    $HTMLString .= <<"EOF";
+<div id="$ServerErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $ErrorMessage
     </p>
 </div>
 EOF
-    }
 
     my $AutocompleteMinLength = int( $FieldConfig->{AutocompleteMinLength} || 3 );
     my $QueryDelay            = int( $FieldConfig->{QueryDelay}            || 500 );
@@ -279,10 +272,6 @@ sub ReadableValueRender {
 
     my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
 
-    $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
-
-    my $PossibleValues = $Param{DynamicFieldConfig}->{Config}->{PossibleValues};
-
     # set Value and Title variables
     my $Value = '';
     my $Title = '';
@@ -383,10 +372,12 @@ sub SearchFieldRender {
     # Assemble display values
     # If there are no available values, leave it empty.
     if ( IsHashRefWithData($SelectionData) ) {
+        my $TicketID = $Param{LayoutObject}->{TicketID};
         $SelectionData = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => [ keys %{$SelectionData} ],
             Limit              => '',
+            TicketID           => $TicketID,
         );
     }
 
@@ -450,10 +441,12 @@ sub _AutocompleteSearchFieldRender {
 
     my $SelectionData = {};
     if ( IsArrayRefWithData($FieldValues) ) {
+        my $TicketID = $Param{LayoutObject}->{TicketID};
         $SelectionData = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => $FieldValues,
             Limit              => '',
+            TicketID           => $TicketID,
         );
     }
 
@@ -541,9 +534,11 @@ sub ValueLookup {
 
     return $Param{Key} if !IsStringWithData( $Param{Key} );
 
-    my $Value = $DynamicFieldWebserviceObject->DisplayValueGet(
+    my $TicketID = $Param{LayoutObject}->{TicketID};
+    my $Value    = $DynamicFieldWebserviceObject->DisplayValueGet(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         Value              => $Param{Key},
+        TicketID           => $TicketID,
     );
 
     return $Value;
@@ -675,11 +670,11 @@ sub PossibleValuesGet {
 
     my %PossibleValues;
 
-    # Provide empty value if no value is present so the field will not be displayed as disabled.
-    if ( !$Param{Value} ) {
-        $PossibleValues{' '} = '';
-    }
+    # Provide empty value so the field will not be displayed as disabled if there are no selectable
+    # values yet.
+    $PossibleValues{' '} = '';
 
+    my $TicketID = $Param{LayoutObject}->{TicketID};
     if ( $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm} ) {
         my $InitialSearchTerm = $LayoutObject->Ascii2Html(
             Text => $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm},
@@ -689,6 +684,7 @@ sub PossibleValuesGet {
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             SearchTerms        => $InitialSearchTerm,
             UserID             => $Param{UserID},
+            TicketID           => $TicketID,
         );
         if ( IsArrayRefWithData($Results) ) {
             for my $Result ( @{$Results} ) {
@@ -709,6 +705,7 @@ sub PossibleValuesGet {
         my $DisplayValue = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => [ $Param{Value} ],
+            TicketID           => $TicketID,
         );
 
         %PossibleValues = (
@@ -755,6 +752,12 @@ sub StatsSearchFieldParameterBuild {
     my ( $Self, %Param ) = @_;
 
     return Kernel::System::DynamicField::Driver::BaseSelect::StatsSearchFieldParameterBuild( $Self, %Param );
+}
+
+sub FieldValueValidate {
+    my ( $Self, %Param ) = @_;
+
+    return 1;
 }
 
 1;

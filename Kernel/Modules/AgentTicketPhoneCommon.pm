@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketPhoneCommon;
 
 use strict;
 use warnings;
+use utf8;
 
 use Mail::Address;
 use Kernel::System::VariableCheck qw(:all);
@@ -869,6 +870,7 @@ sub Run {
                 else {
                     # Use customer data as From, if possible.
                     my @MetaArticles = $ArticleObject->ArticleList(
+                        TicketID   => $Self->{TicketID},
                         SenderType => 'customer',
                         OnlyLast   => 1,
                     );

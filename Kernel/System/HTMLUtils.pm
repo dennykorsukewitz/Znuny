@@ -769,7 +769,7 @@ sub DocumentCleanup {
 
     # replace <blockquote> by using
     # "<div style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt" type="cite">"
-    # because of cross mail client and browser compatability
+    # because of cross mail client and browser compatibility
     my $Style = "border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt";
     for my $Index ( 1 .. 10 ) {
         $Param{String} =~ s{
@@ -912,7 +912,7 @@ sub LinkQuote {
     }
     ${$String} =~ s{
         (                                          # $1 greater-than and less-than sign
-            > | < | \s+ | §{10} |
+            > | < | \s | §{10} |
             (?: &[a-zA-Z0-9]+; )                   # get html entities
         )
         (                                          # $2

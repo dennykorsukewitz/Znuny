@@ -18,6 +18,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Translation::JavaScriptStrings)
 
 package Kernel::Language::ru;
 
@@ -37,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.837435982157608;
+    $Self->{Completeness}        = 0.836168455821635;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -577,7 +578,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => 'Обзор',
         'Screens' => '',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => '',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
@@ -627,6 +628,9 @@ sub Data {
         'Backend' => 'Бэкенд',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1099,9 +1103,6 @@ sub Data {
         'Send Keep-Alive' => 'Отправить Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Этот параметр определяет закрывать входящие соединения или оставлять открытыми.',
-        'Additional response headers' => 'Дополнительные заголовки ответа',
-        'Header' => 'Заголовок',
-        'Add response header' => 'Добавить заголовок ответа',
         'Endpoint' => 'Конечная точка',
         'URI to indicate specific location for accessing a web service.' =>
             'URI для указания точного расположения для доступа к веб-сервису.',
@@ -1190,7 +1191,10 @@ sub Data {
             'Конкретная команда HTTP для использования в запросах этого Invoker (необязательна).',
         'Default command' => 'Команда по умолчанию',
         'The default HTTP command to use for the requests.' => 'Команда HTTP по умолчанию для использования в запросах.',
+        'Additional response headers' => 'Дополнительные заголовки ответа',
         'Additional request headers' => '',
+        'Header' => 'Заголовок',
+        'Add response header' => 'Добавить заголовок ответа',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
@@ -1552,9 +1556,11 @@ sub Data {
         'Date' => 'Дата',
         'List of Files' => 'Список файлов',
         'Permission' => 'Права доступа',
+        'Size' => 'Размер',
+        'Problem' => 'Проблема',
+        'OK' => 'О.К.',
         'Download file from package!' => 'Загрузить файл из пакета!',
         'Required' => 'Требуется',
-        'Size' => 'Размер',
         'Primary Key' => 'Главный ключ',
         'Auto Increment' => 'Авто инкремент',
         'SQL' => 'SQL',
@@ -1753,6 +1759,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Вы действительно желаете удалить эту Активность?',
         'Do you really want to delete this Activity Dialog?' => 'Вы действительно желаете удалить этот Диалог Активности?',
         'Do you really want to delete this Transition?' => 'Вы действительно желаете удалить этот Переход?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Действительно удалить это переходное действие?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Вы действительно желаете удалить эту Актвность из схемы? Это можно отменить только покинув этот экран без сохранения.',
@@ -2393,8 +2401,12 @@ sub Data {
         'Change Customer Relations' => 'Изменить Связи клиентов',
         'Open' => 'Открытые',
         'Closed' => 'Закрытые',
+        'Phone ticket' => 'Заявка по телефону',
+        'Email ticket' => 'Заявка по почте',
         '%s open ticket(s) of %s' => '%s открытых заявок из %s',
         '%s closed ticket(s) of %s' => '%s закрытых заявок из %s',
+        'New phone ticket from %s' => 'Новая телефонная заявка от %s',
+        'New email ticket to %s' => 'Новая заявка по почте в %s',
         'Edit customer ID' => 'Редактировать ID клиента',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2409,10 +2421,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Информация о клиенте',
-        'Phone ticket' => 'Заявка по телефону',
-        'Email ticket' => 'Заявка по почте',
-        'New phone ticket from %s' => 'Новая телефонная заявка от %s',
-        'New email ticket to %s' => 'Новая заявка по почте в %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2520,7 +2528,6 @@ sub Data {
         'Split' => 'Разделить',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Читайте еще об отчетах в Znuny',
         'Statistics Management' => 'Управление статистикой',
         'Add Statistics' => 'Добавить отчет',
         'Dynamic Matrix' => 'Динамическая матрица',
@@ -2849,7 +2856,6 @@ sub Data {
         'Close this message' => 'Закрыть это сообщение',
         'Image' => 'Изображение',
         'PDF' => 'PDF',
-        'Unknown' => 'Неизвестный',
         'View' => 'Просмотр',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2889,7 +2895,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Уважаемый Клиент, ',
         'thank you for using our services.' => 'благодарим за использование наших сервисов.',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
@@ -2901,8 +2906,8 @@ sub Data {
         'From assigned Customer IDs' => 'Из назначенных Customer ID',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Ошибка',
         'An Error Occurred' => 'Произошла ошибка',
-        'Error Details' => 'Подробности об ошибке',
         'Traceback' => 'Трассировка',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2941,6 +2946,7 @@ sub Data {
         'Request New Password' => 'Запросить новый пароль',
         'Your User Name' => 'Логин',
         'A new password will be sent to your email address.' => 'Новый пароль будет отправлен на ваш адрес электронной почты',
+        'Back to login' => 'Вернуться к странице входа в систему',
         'Create Account' => 'Создать учетную запись',
         'Please fill out this form to receive login credentials.' => 'Пожалуйста, заполните эту форму, чтобы получить учетные данные для входа',
         'How we should address you' => 'Как мы должны к вам обращаться',
@@ -3004,6 +3010,7 @@ sub Data {
         'Ticket fields' => 'Поля заявки',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Подробности об ошибке',
         'Expand' => 'Развернуть',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3079,7 +3086,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Готово',
-        'Error' => 'Ошибка',
         'Database setup successful!' => 'База данных настроена успешно!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3149,7 +3155,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Забыли свой пароль?',
-        'Back to login' => 'Вернуться к странице входа в систему',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Масштабировать предпросмотр',
@@ -3345,8 +3350,6 @@ sub Data {
         'Enable' => 'Включить',
         'Reset this setting to its default state' => 'Сбросить эту настройку на значение по умолчанию',
         'Reset setting' => 'Сбросить настройку',
-        'Show user specific changes for this setting' => 'Показать пользовательское значение этого параметра',
-        'Show user settings' => 'Показать пользовательские настройки',
         'Copy a direct link to this setting to your clipboard' => 'Скопировать прямую ссылку на этот параметр в буфер обмена',
         'Copy direct link' => 'Скопировать прямую ссылку',
         'Remove this setting from your favorites setting' => 'Удалить эту настройку из вашего списка избранных',
@@ -3428,6 +3431,7 @@ sub Data {
         'Process state' => 'Состояние процесса',
         'Running' => 'Выполняется',
         'Finished' => 'Закончено',
+        'Unknown' => 'Неизвестный',
         'No package information available.' => 'Информация о пакете недоступна.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3862,7 +3866,6 @@ sub Data {
         'No such file %s in package!' => 'Отсутствует файл %s в пакете!',
         'No such file %s in local file system!' => 'Отсутствует файл %s в локальной системе!',
         'Can\'t read %s!' => 'Не возможно прочитать %s!',
-        'File is OK' => 'Файлы ОК',
         'Package has locally modified files.' => 'Пакет содержит локально изменённые файлы.',
         'Not Started' => 'Не запущено',
         'Updated' => 'Обновлено',
@@ -4487,6 +4490,8 @@ sub Data {
             'Ошибка: Убедитесь что ваша СУБД принимает пакеты размером больше %s MB (текущее значение размера пакета - до %s MB). Измените значение параметра max_allowed_packet для вашей СУБД во избежание ошибок.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Ошибка: Установите значение параметра  innodb_log_file_size для вашей СУБД по крайней мере %s MB (текущее: %s MB, рекомендуемое: %s MB) Более подробно смотрите в %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Неверный collation базы данных (%s - %s, а требуется utf8)',
 
@@ -5034,7 +5039,7 @@ sub Data {
         'Client Connection Charset' => 'Кодировка клиентского соединения',
         'Setting character_set_client needs to be utf8.' => 'Значение кодировки для клиента должно быть UNICODE or UTF8.',
         'Server Database Charset' => 'Кодировка для сервера базы данных',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
             '',
         'The setting character_set_database needs to be \'utf8\'.' => 'Значение параметра character_set_database должно быть \'utf8\'. ',
         'Table Charset' => 'Кодировка для таблицы',
@@ -5093,7 +5098,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => 'PostgreSQL 9.2 или выше необходим.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => 'Операционная система',
         'Znuny Disk Partition' => 'Раздел диска для Znuny',
 
@@ -5140,165 +5145,6 @@ sub Data {
         'There should be more than 60% free swap space.' => 'Должно быть более 60% свободного места для подкачки.',
         'There should be no more than 200 MB swap space used.' => 'Нельзя использовать для подкачки более 200МВ',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => 'Состояние Article Search Index',
-        'Indexed Articles' => 'Индексированные сообщения',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => 'Входящие сообщения',
-        'Outgoing communications' => 'Исходящие сообщения',
-        'Failed communications' => '',
-        'Average processing time of communications (s)' => 'Среднее время сеанса (ов)',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => '',
-        'No connections found.' => 'Подключения не найдены.',
-        'ok' => 'ok',
-        'permanent connection errors' => 'постоянные ошибки связи',
-        'intermittent connection errors' => 'Ошибки прерывания соединения',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => 'Параметры конфигурации',
-        'Could not determine value.' => 'Не удалось определить значение.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => 'Служба ',
-        'Daemon is running.' => 'Демон работает.',
-        'Daemon is not running.' => 'Служба не запущена.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => 'Записи базы данных',
-        'Tickets' => 'Заявки',
-        'Ticket History Entries' => 'Записи истории заявки',
-        'Articles' => 'Заметки/сообщения',
-        'Attachments (DB, Without HTML)' => 'Вложения (DB, без HTML)',
-        'Customers With At Least One Ticket' => 'Клиенты, имеющие хотя бы одну заявку',
-        'Dynamic Field Values' => 'Значения динамического поля',
-        'Invalid Dynamic Fields' => 'Неверные динамические поля',
-        'Invalid Dynamic Field Values' => 'Неверные значения динамического поля',
-        'GenericInterface Webservices' => 'Веб-сервисы GenericInterface ',
-        'Process Tickets' => 'Процессные заявки',
-        'Months Between First And Last Ticket' => 'Месяцев между первой и последней заявками',
-        'Tickets Per Month (avg)' => 'Заявок в месяц (среднее)',
-        'Open Tickets' => 'Открытые заявки',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => 'Логин и пароль для SOAP по умолчанию',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            'Риск безопасности: вы используете установки по умолчанию для SOAP::User и SOAP::Password. Измените их.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => 'Пароль администратора по умолчанию',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            'Риск безопасности: учетная запись агента root@localhost имеет пароль по умолчанию. Измените его или сделайте учетную запись недействительной.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => 'Очередь для отправки писем',
-        'Emails queued for sending' => 'Очередь писем на отправку',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => 'FQDN (Имя домена)',
-        'Please configure your FQDN setting.' => 'Пожалуйста укажите ваш FQDN.',
-        'Domain Name' => 'Имя домена',
-        'Your FQDN setting is invalid.' => 'Значение для FQDN неверно.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => 'Файловая система доступная для записи',
-        'The file system on your Znuny partition is not writable.' => 'Файловая система в разделе Znuny недоступна для записи.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => 'Резервные копии устаревшей конфигурации',
-        'No legacy configuration backup files found.' => 'Нет устаревших файлов резервного копирования конфигурации.',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            '',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => 'Состояние установки пакетов',
-        'Some packages have locally modified files.' => 'Некоторые пакеты содержат локально модифицированные файлы.',
-        'Some packages are not correctly installed.' => 'Некоторые пакеты установлены некорректно.',
-        'Package Framework Version Status' => '',
-        'Some packages are not allowed for the current framework version.' =>
-            'Некоторые пакеты не разрешены для текущей версии сервера.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => 'Список пакетов',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => 'Настройка параметров сеансов',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => 'Буферизованные почтовые сообщения',
-        'There are emails in var/spool that Znuny could not process.' => 'Имеются почтовые сообщения в var/spool, которые Znuny не смог обработать.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            'Ваш SystemID неверен. Он должен состоять только из цифр.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => 'Тип заявки по умолчанию',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            'Указанный тип заявки недействителен или ошибочен. Пожалуйста, измените настройки Ticket::Type::Default и укажите действительный тип заявки.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => 'Модуль индексирования заявок',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            'У вас в системе более 60000 заявок и необходимо использовать опцию StaticDB. Смотрите руководство администратора (настройки производительности) для более подробной информации.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => 'Недействительные агенты с заблокированными заявками',
-        'There are invalid users with locked tickets.' => 'Есть недействительные агенты с заблокированными заявками.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            'У вас не должно быть более 8000 открытых заявок в системе.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => 'Модуль индексирования заявок для поиска',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            'Процесс индексирования заставляет хранить исходный текст статьи в индексе поиска статьи без выполнения фильтров или применения стоп-слов. Это увеличит размер индекса поиска и, таким образом, может замедлить поиск в полнотекстовом режиме.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => 'Потерянные записи в таблице ticket_lock_index ',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Таблица ticket_lock_index содержит потерянные записи. Выполните скрипт bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" для очистки индексов StaticDB.',
-        'Orphaned Records In ticket_index Table' => 'Потерянные записи в таблице ticket_index',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Таблица ticket_index содержит потерянные записи. Выполните скрипт bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" для очистки индексов StaticDB.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => 'Параметры времени',
-        'Server time zone' => 'Временная зона сервера',
-        'Znuny time zone' => 'Временная зона Znuny ',
-        'Znuny time zone is not set.' => 'Временная зона Znuny не установлена.',
-        'User default time zone' => 'Временная зона пользователя по умолчанию',
-        'User default time zone is not set.' => 'Временная зона пользователя не установлена.',
-        'Calendar time zone is not set.' => 'Временная зона календаря не установлена.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => 'UI - Использование скинов агента',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => 'UI - использование тем агента',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => '',
-        'Agents using custom main menu ordering' => 'Агенты, использующие пользовательские настройки главного меню',
-        'Agents using favourites for the admin overview' => 'Агенты, использующие избранное для панели администрирования',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => 'Версия Znuny',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Веб-сервер',
         'Loaded Apache Modules' => 'Загруженные модули Apache',
@@ -5336,13 +5182,168 @@ sub Data {
         'Webserver Version' => 'Версия Веб-сервера',
         'Could not determine webserver version.' => 'Не удалось определить версию Веб - сервера.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => 'Состояние Article Search Index',
+        'Indexed Articles' => 'Индексированные сообщения',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => 'Входящие сообщения',
+        'Outgoing communications' => 'Исходящие сообщения',
+        'Failed communications' => '',
+        'Average processing time of communications (s)' => 'Среднее время сеанса (ов)',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => '',
+        'No connections found.' => 'Подключения не найдены.',
+        'ok' => 'ok',
+        'permanent connection errors' => 'постоянные ошибки связи',
+        'intermittent connection errors' => 'Ошибки прерывания соединения',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => 'Параметры конфигурации',
+        'Could not determine value.' => 'Не удалось определить значение.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => 'Служба ',
+        'Daemon is running.' => 'Демон работает.',
+        'Daemon is not running.' => 'Служба не запущена.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => 'Записи базы данных',
+        'Tickets' => 'Заявки',
+        'Ticket History Entries' => 'Записи истории заявки',
+        'Articles' => 'Заметки/сообщения',
+        'Attachments (DB, Without HTML)' => 'Вложения (DB, без HTML)',
+        'Customers With At Least One Ticket' => 'Клиенты, имеющие хотя бы одну заявку',
+        'Dynamic Field Values' => 'Значения динамического поля',
+        'Invalid Dynamic Fields' => 'Неверные динамические поля',
+        'Invalid Dynamic Field Values' => 'Неверные значения динамического поля',
+        'GenericInterface Webservices' => 'Веб-сервисы GenericInterface ',
+        'Process Tickets' => 'Процессные заявки',
+        'Months Between First And Last Ticket' => 'Месяцев между первой и последней заявками',
+        'Tickets Per Month (avg)' => 'Заявок в месяц (среднее)',
+        'Open Tickets' => 'Открытые заявки',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => 'Логин и пароль для SOAP по умолчанию',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            'Риск безопасности: вы используете установки по умолчанию для SOAP::User и SOAP::Password. Измените их.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => 'Пароль администратора по умолчанию',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            'Риск безопасности: учетная запись агента root@localhost имеет пароль по умолчанию. Измените его или сделайте учетную запись недействительной.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => 'Очередь для отправки писем',
+        'Emails queued for sending' => 'Очередь писем на отправку',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => 'FQDN (Имя домена)',
+        'Please configure your FQDN setting.' => 'Пожалуйста укажите ваш FQDN.',
+        'Domain Name' => 'Имя домена',
+        'Your FQDN setting is invalid.' => 'Значение для FQDN неверно.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => 'Файловая система доступная для записи',
+        'The file system on your Znuny partition is not writable.' => 'Файловая система в разделе Znuny недоступна для записи.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => 'Резервные копии устаревшей конфигурации',
+        'No legacy configuration backup files found.' => 'Нет устаревших файлов резервного копирования конфигурации.',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            '',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => 'Состояние установки пакетов',
+        'Some packages have locally modified files.' => 'Некоторые пакеты содержат локально модифицированные файлы.',
+        'Some packages are not correctly installed.' => 'Некоторые пакеты установлены некорректно.',
+        'Package Framework Version Status' => '',
+        'Some packages are not allowed for the current framework version.' =>
+            'Некоторые пакеты не разрешены для текущей версии сервера.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => 'Список пакетов',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => 'Настройка параметров сеансов',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => 'Буферизованные почтовые сообщения',
+        'There are emails in var/spool that Znuny could not process.' => 'Имеются почтовые сообщения в var/spool, которые Znuny не смог обработать.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            'Ваш SystemID неверен. Он должен состоять только из цифр.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => 'Тип заявки по умолчанию',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            'Указанный тип заявки недействителен или ошибочен. Пожалуйста, измените настройки Ticket::Type::Default и укажите действительный тип заявки.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => 'Модуль индексирования заявок',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            'У вас в системе более 60000 заявок и необходимо использовать опцию StaticDB. Смотрите руководство администратора (настройки производительности) для более подробной информации.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => 'Недействительные агенты с заблокированными заявками',
+        'There are invalid users with locked tickets.' => 'Есть недействительные агенты с заблокированными заявками.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            'У вас не должно быть более 8000 открытых заявок в системе.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => 'Модуль индексирования заявок для поиска',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            'Процесс индексирования заставляет хранить исходный текст статьи в индексе поиска статьи без выполнения фильтров или применения стоп-слов. Это увеличит размер индекса поиска и, таким образом, может замедлить поиск в полнотекстовом режиме.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => 'Потерянные записи в таблице ticket_lock_index ',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Таблица ticket_lock_index содержит потерянные записи. Выполните скрипт bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" для очистки индексов StaticDB.',
+        'Orphaned Records In ticket_index Table' => 'Потерянные записи в таблице ticket_index',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Таблица ticket_index содержит потерянные записи. Выполните скрипт bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" для очистки индексов StaticDB.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => 'Параметры времени',
+        'Server time zone' => 'Временная зона сервера',
+        'Znuny time zone' => 'Временная зона Znuny ',
+        'Znuny time zone is not set.' => 'Временная зона Znuny не установлена.',
+        'User default time zone' => 'Временная зона пользователя по умолчанию',
+        'User default time zone is not set.' => 'Временная зона пользователя не установлена.',
+        'Calendar time zone is not set.' => 'Временная зона календаря не установлена.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => 'UI - Использование скинов агента',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => 'UI - использование тем агента',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => '',
+        'Agents using custom main menu ordering' => 'Агенты, использующие пользовательские настройки главного меню',
+        'Agents using favourites for the admin overview' => 'Агенты, использующие избранное для панели администрирования',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => 'Версия Znuny',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Подробности о конкурирующих ползователях',
         'Concurrent Users' => 'Конкурентая лицензия',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'О.К.',
-        'Problem' => 'Проблема',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => 'Параметр %s не существует!',
@@ -5920,7 +5921,6 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Задает идентификатор пользователя для клиентской панели.',
         'Activates support for customer and customer user groups.' => 'Включить поддержку компаний и групп клиентов',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6014,7 +6014,7 @@ sub Data {
             'Если "LDAP" было выбрано, вы можете добавить фильтр для каждого LDAP запроса, например (mail=*), (objectclass=user) или (!objectclass=computer).',
         'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
             'Если "LDAP" было выбрано для Customer::AuthModule и вы желаете добавить суффикс к каждому логину пользователя, задайте его здесь, т.е. вы вы хотите имя пользователя user, но в вашем LDAP существует user@domain.',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+        'If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
             'Если "LDAP" было выбрано для Customer::AuthModule и специальные параметры необходимы для Net::LDAP perl module, вы можете задать их здесь. См. "perldoc Net::LDAP" для дополнительной информации о параметрах.',
         'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'Если "LDAP" было выбрано для Customer::AuthModule, вы можете задать должно ли приложение быть остановлено если, например, соединение с сервером не может быть установлено из-за проблем с сетью.',
@@ -6074,8 +6074,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'Задает возможные форматы вывода отчетов',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Позволяет поменять местами оси графика в отчете.',
-        'Allows agents to generate individual-related stats.' => 'Разрешать использовать в отчётах данные агентов (отчеты по агентам).',
-        'Allows invalid agents to generate individual-related stats.' => 'Разрешать строить отчёты по недействительным агентам',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Показывает все идентификаторы клиентов в поле типа "multi-select" (не следует использовать при наличии большого количества таких идентификаторов).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -6510,6 +6512,13 @@ sub Data {
             'Устанавливает, должна ли быть выполнена предварительная сортировка по приоритету в обзоре заявок по сервисам.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Задаёт порядок сортировки по умолчанию для всех сервисов при просмотре сервисов после сортировки по приоритету.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Включить учет времени выполнения',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Задает единицы измерения для единиц времени (например: рабочие часы, часы, минуты).',
@@ -7857,6 +7866,8 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'временно недействительный',
@@ -8506,7 +8517,6 @@ Thanks for your help!
         'Change the priority for this ticket' => 'Поменять приоритет заявки',
         'Change the responsible for this ticket' => 'Изменить ответственного за эту заявку',
         'Change your avatar image.' => 'Сменить изображение аватара.',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Измените свой пароль и остальное.',
         'Changed SLA to "%s" (%s).' => 'SLA изменен на "%s" (%s).',
         'Changed archive state to "%s".' => 'Архивный статус изменен на "%s".',
@@ -8867,7 +8877,6 @@ Thanks for your help!
         'Plugin search' => 'Поисковый плагин',
         'Plugin search module for autocomplete.' => 'Поисковый плагин для автозавершения.',
         'Polish' => 'Польский',
-        'Popup Profile' => '',
         'Portuguese' => 'Португальский',
         'Portuguese (Brasil)' => 'Португальский (Бразилия)',
         'PostMaster Filters' => 'Фильтры PostMaster (входящей почты)',
@@ -9238,6 +9247,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

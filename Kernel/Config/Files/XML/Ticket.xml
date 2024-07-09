@@ -2000,6 +2000,34 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###VisualAlarms" Required="0" Valid="1">
+        <Description Translatable="1">Enable highlighting services based on ticket age.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###HighlightAge1" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the age in minutes (first level) for highlighting services that contain untouched tickets.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,7}$">1440</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###HighlightAge2" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the age in minutes (second level) for highlighting services that contain untouched tickets.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,7}$">2880</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###Blink" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Activates a blinking mechanism of the service that contains the oldest ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AccountTime" Required="1" Valid="1">
         <Description Translatable="1">Activates time accounting.</Description>
         <Navigation>Frontend::Agent</Navigation>
@@ -2408,6 +2436,13 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###OwnerIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###ResponsibleIDs" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
         <Value>
@@ -4938,10 +4973,6 @@
         <Description Translatable="1">Defines an external link to the database of the customer (e.g. 'http://yourhost/customer.php?CID=[% Data.CustomerID %]' or '').</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <!--
-            TODO: Can this be removed?
-            <Item ValueType="String" ValueRegex="">[% Env("CGIHandle") %]?Action=AgentTicketCustomer;TicketID=[% Data.TicketID | html %]</Item>
-            -->
             <Item ValueType="String" ValueRegex="">[% Env("CGIHandle") %]?Action=AgentCustomerInformationCenter;CustomerID=[% Data.CustomerID | uri %]</Item>
         </Value>
     </Setting>
@@ -5121,9 +5152,6 @@
             </Hash>
         </Value>
     </Setting>
-    <!-- TODO: check if the counter is really needed, otherwise the module can be removed and use
-    the standard link module
-    -->
     <Setting Name="Frontend::ToolBarModule###200-Ticket::AgentTicketService" Required="0" Valid="1">
         <Description Translatable="1">Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
@@ -5137,7 +5165,6 @@
             </Hash>
         </Value>
     </Setting>
-
     <Setting Name="Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
@@ -6068,8 +6095,8 @@
                 <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
                 <Item Key="Title" Translatable="1">Reminder Tickets</Item>
                 <Item Key="Description" Translatable="1">All tickets with a reminder set where the reminder date has been reached</Item>
-                <Item Key="Attributes">TicketPendingTimeOlderMinutes=1;StateType=pending reminder;SortBy=PendingTime;OrderBy=Down;</Item>
-                <Item Key="Filter">Locked</Item>
+                <Item Key="Attributes">StateType=pending reminder;SortBy=PendingTime;OrderBy=Up;</Item>
+                <Item Key="Filter"></Item>
                 <Item Key="Time">UntilTime</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">rw</Item>
@@ -6094,11 +6121,11 @@
                         <Item Key="EscalationResponseTime" SelectedID="1"></Item>
                         <Item Key="EscalationSolutionTime" SelectedID="1"></Item>
                         <Item Key="EscalationTime" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="2"></Item>
                         <Item Key="EscalationUpdateTime" SelectedID="1"></Item>
                         <Item Key="TicketNumber" SelectedID="2"></Item>
                         <Item Key="Lock" SelectedID="1"></Item>
                         <Item Key="Owner" SelectedID="1"></Item>
-                        <Item Key="PendingTime" SelectedID="1"></Item>
                         <Item Key="Queue" SelectedID="1"></Item>
                         <Item Key="Responsible" SelectedID="1"></Item>
                         <Item Key="Priority" SelectedID="1"></Item>
@@ -6457,8 +6484,8 @@
                 <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
                 <Item Key="Title" Translatable="1">Reminder Tickets</Item>
                 <Item Key="Description" Translatable="1">All tickets with a reminder set where the reminder date has been reached</Item>
-                <Item Key="Attributes">TicketPendingTimeOlderMinutes=1;StateType=pending reminder;SortBy=PendingTime;OrderBy=Down;</Item>
-                <Item Key="Filter">Locked</Item>
+                <Item Key="Attributes">StateType=pending reminder;SortBy=PendingTime;OrderBy=Up;</Item>
+                <Item Key="Filter"></Item>
                 <Item Key="Time">UntilTime</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
@@ -6487,7 +6514,7 @@
                         <Item Key="TicketNumber" SelectedID="2"></Item>
                         <Item Key="Lock" SelectedID="1"></Item>
                         <Item Key="Owner" SelectedID="1"></Item>
-                        <Item Key="PendingTime" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="2"></Item>
                         <Item Key="Queue" SelectedID="1"></Item>
                         <Item Key="Responsible" SelectedID="1"></Item>
                         <Item Key="Priority" SelectedID="1"></Item>
@@ -6700,8 +6727,8 @@
                 <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
                 <Item Key="Title" Translatable="1">Reminder Tickets</Item>
                 <Item Key="Description" Translatable="1">All tickets with a reminder set where the reminder date has been reached</Item>
-                <Item Key="Attributes">TicketPendingTimeOlderMinutes=1;StateType=pending reminder;SortBy=PendingTime;OrderBy=Down;</Item>
-                <Item Key="Filter">Locked</Item>
+                <Item Key="Attributes">StateType=pending reminder;SortBy=PendingTime;OrderBy=Up;</Item>
+                <Item Key="Filter"></Item>
                 <Item Key="Time">UntilTime</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
@@ -6730,7 +6757,7 @@
                         <Item Key="TicketNumber" SelectedID="2"></Item>
                         <Item Key="Lock" SelectedID="1"></Item>
                         <Item Key="Owner" SelectedID="1"></Item>
-                        <Item Key="PendingTime" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="2"></Item>
                         <Item Key="Queue" SelectedID="1"></Item>
                         <Item Key="Responsible" SelectedID="1"></Item>
                         <Item Key="Priority" SelectedID="1"></Item>

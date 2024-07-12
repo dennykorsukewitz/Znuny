@@ -1,0 +1,5 @@
+@media screen,projection,tv,handheld {
+    .AdminSupportDataCollector .CheckResults > li h3.Heading {
+      filter: invert(0%);
+    }
+}

@@ -1798,6 +1798,7 @@ sub Footer {
         SearchFrontend             => $JSCall,
         Autocomplete               => $AutocompleteConfig,
         'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
+        Skin                       => $Self->{SkinSelected},
     );
 
     for my $Config ( sort keys %JSConfig ) {

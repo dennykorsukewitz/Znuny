@@ -1,0 +1,3 @@
+img, video, svg {
+    filter: invert(100%) hue-rotate(180deg);
+}

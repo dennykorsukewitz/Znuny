@@ -39,7 +39,7 @@ jobs:
 
       - name: Prepare code policy
         run: |
-          cpanm --verbose Algorithm::Diff Code::TidyAll Perl::Critic Perl::Tidy Pod::POM XML::Parser Text::PO::Gettext DateTime::Format::Strptime File::Spec I18N::Langinfo warnings
+          cpanm --verbose Algorithm::Diff Code::TidyAll Perl::Critic Perl::Tidy Pod::POM XML::Parser Text::PO::Gettext DateTime::Format::Strptime Module::Generic Text::PO
           codepolicy/bin/znuny.CodePolicy.pl --install-eslint
 
 

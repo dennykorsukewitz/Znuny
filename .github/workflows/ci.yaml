@@ -20,14 +20,14 @@ jobs:
     container: debian:10-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
         with:
           path: znuny
 
       - name: Check out code policy
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
         with:
@@ -55,7 +55,7 @@ jobs:
     container: debian:10-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "0"
 
@@ -78,7 +78,7 @@ jobs:
     container: debian:10-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -106,7 +106,7 @@ jobs:
     container: debian:10-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -148,7 +148,7 @@ jobs:
           MYSQL_DATABASE: "znuny"
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -184,7 +184,7 @@ jobs:
           MYSQL_DATABASE: "znuny"
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -230,7 +230,7 @@ jobs:
           MYSQL_DATABASE: "znuny"
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -272,7 +272,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -289,7 +289,7 @@ jobs:
 
       - name: Archive screenshots from selenium
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Download all selenium screenshots
           retention-days: 1
@@ -324,7 +324,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -341,7 +341,7 @@ jobs:
 
       - name: Archive screenshots from selenium
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Download all selenium screenshots
           retention-days: 1
@@ -376,7 +376,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -393,7 +393,7 @@ jobs:
 
       - name: Archive screenshots from selenium
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Download all selenium screenshots
           retention-days: 1
@@ -428,7 +428,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -445,7 +445,7 @@ jobs:
 
       - name: Archive screenshots from selenium
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Download all selenium screenshots
           retention-days: 1
@@ -480,7 +480,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -497,7 +497,7 @@ jobs:
 
       - name: Archive screenshots from selenium
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Download all selenium screenshots
           retention-days: 1
@@ -532,7 +532,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -549,7 +549,7 @@ jobs:
 
       - name: Archive screenshots from selenium
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Download all selenium screenshots
           retention-days: 1
@@ -584,7 +584,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         env:
           fetch-depth: "1"
 
@@ -601,7 +601,7 @@ jobs:
 
       - name: Archive screenshots from selenium
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Download all selenium screenshots
           retention-days: 1

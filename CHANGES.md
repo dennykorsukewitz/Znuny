@@ -1,6 +1,8 @@
 # 7.1.4 2024-??-??
+ - 2024-12-10 System configuration option SendmailEncodingForce is now a selection instead of a text field.
  - 2024-12-10 Fixed "From" and "To" not being expandable for an article in ticket zoom. Thanks to Oliver Freyermuth (@olifre) for reporting. [#605](https://github.com/znuny/Znuny/issues/605)
-  -2024-12-06 Fixed data evaluation in ICS calendar event.
+ - 2024-12-09 Fixed multiple notifications being sent for empty process tickets (event NotificationNewTicket).
+ - 2024-12-06 Fixed data evaluation in ICS calendar event.
  - 2024-12-02 Added Filter for Admin->Export DynamicFields.
  - 2024-11-28 Fixed Server Error, when Frontend::Template::GenerateBlockHooks###NAME has no valid data structure.
  - 2024-11-22 Added new system configuration option 'User::DefaultPreferences'. These preferences will automatically be set during user (agent) creation.
@@ -15,6 +17,7 @@
  - 2024-10-22 Perl Module Hash::Merge is now be listed in znuny.CheckModules.pl/otrs.CheckModules.pl as mandatory.
  - 2024-10-21 Sector Nord AG: Fixed #571 AgentTicketProcess Mobile-View is not showing all elements of ActivityDialog. Thanks to @LuBroering (Lukas Bröring Sector Nord AG). [PR#553](https://github.com/znuny/Znuny/pull/553)
  - 2024-10-16 AdminSystemConfiguration: Addon name is no longer translated.
+ - 2024-10-15 Ticket search for customer ID in customer interface now searches for the raw ID. Thanks to @BuilderNSV for reporting the issue. [#602](https://github.com/znuny/Znuny/issues/602)
  - 2024-10-15 Added additional PageNavBar to bottom in AdminDynamicField.
  - 2024-10-10 Updated MIME::Decoder::QuotedPrint from 5.509 to 5.515.
  - 2024-10-07 Updated jstree from version 3.3.7 to 3.3.8.

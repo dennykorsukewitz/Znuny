@@ -1,0 +1,197 @@
+---
+name: Bugfix
+description: Create a bugfix pull request to fix an issue in the Znuny project.
+title: "Bugfix - "
+labels: ["1 - 🐞 bug 🐞"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You are amazing! 🚀
+        Thanks for contributing to the Znuny community project!
+        Please, DO NOT DELETE ANY TEXT from this template (unless instructed)!
+
+        ### Licensing, copyright and credits
+
+        Znuny is an open fork of an existing software. So we have to respect the already given copyright of the original creators.
+
+        New files will be licensed using the AGPL Version 3. If you contribute code to the Znuny project you will get mentioned in the pull request incl. the commit, in CHANGES.md and in AUTHORS.md. We will not mention you in the file you provided or changed. Your work is highly appreciated and acknowledged but you contribute it to the project and your copyright will pass on to the fork itself.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: |
+        Describe the bug that this PR fixes. Be specific and include:
+        - What was the expected behavior?
+        - What was the actual behavior?
+        - When did this bug occur?
+        - What were the steps to reproduce?
+      placeholder: |
+        **Expected behavior:**
+        Describe what should happen...
+
+        **Actual behavior:**
+        Describe what actually happened...
+
+        **When does this occur:**
+        Describe when this bug happens...
+      validations:
+        required: true
+
+  - type: textarea
+    id: proposed-fix
+    attributes:
+      label: Proposed fix
+      description: |
+        Describe the big picture of your changes here to communicate to the
+        maintainers why this pull request should be accepted. Explain:
+        - What was the root cause of the bug?
+        - How does your fix address the issue?
+        - Why is this the best approach to fix the bug?
+      placeholder: |
+        **Root cause:**
+        Describe the root cause of the bug...
+
+        **Fix approach:**
+        Explain how your fix addresses the issue...
+
+        **Why this approach:**
+        Explain why this is the best solution...
+      validations:
+        required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce (before fix)
+      description: |
+        Provide clear steps to reproduce the bug that this PR fixes.
+        This helps reviewers understand the issue and verify the fix.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+      validations:
+        required: true
+
+  - type: textarea
+    id: testing-the-fix
+    attributes:
+      label: Testing the fix
+      description: |
+        Describe how you tested that the fix works:
+        - What specific test cases did you run?
+        - Did you test the exact steps that caused the bug?
+        - Did you test related functionality to ensure no regressions?
+      placeholder: |
+        **Test cases:**
+        - [ ] Tested the exact reproduction steps
+        - [ ] Tested related functionality
+        - [ ] Tested edge cases
+        - [ ] Verified no regressions
+
+        **Additional testing:**
+        Describe any additional testing performed...
+      validations:
+        required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots (if applicable)
+      description: |
+        Add screenshots showing:
+        - The bug before the fix (if possible)
+        - The correct behavior after the fix
+        - Any error messages that were displayed
+      placeholder: |
+        **Before fix:**
+        [Add screenshot or describe the bug visually]
+
+        **After fix:**
+        [Add screenshot or describe the correct behavior]
+
+        **Error messages:**
+        [Add any error messages that were displayed]
+      validations:
+        required: false
+
+  - type: textarea
+    id: breaking-change
+    attributes:
+      label: Breaking change
+      description: |
+        If your PR contains a breaking change, it is important
+        to tell what breaks, how to make it work again and why it is necessary.
+        This piece of text is published with the release notes, so it helps if you
+        write it for the users, not the maintainer.
+        Note: Remove this section if this PR is NOT a breaking change.
+      placeholder: |
+        If this is a breaking change, describe:
+        - What breaks
+        - How to make it work again
+        - Why it is necessary
+
+        If no breaking changes, leave this empty.
+      validations:
+        required: false
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: |
+        Details are important and help maintainers processing your PR.
+        Please be sure to fill out additional details, if applicable.
+        Note: Remove this section if not needed.
+
+        If a PR is related to an issue, please use the 'Linked issues' function on the sidebar.
+      placeholder: |
+        Additional details, related issues, or other relevant information...
+
+        Example:
+        - This PR fixes issue: #
+        - This PR is related to issue: #
+        - Related documentation: #
+      validations:
+        required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        Put an 'x' in the boxes that apply. You can also fill these out after
+        creating the PR. If you're unsure about any of them, don't hesitate to ask.
+        We're here to help! This is simply a reminder of what we are going to look
+        for before merging your code.
+
+        ❕ - nice to have
+        ❗ - required before review
+      options:
+        - label: The code change is tested and works locally (❗)
+          required: true
+        - label: I have reproduced the bug and verified the fix works (❗)
+          required: true
+        - label: I have tested that the fix doesn't introduce new bugs (❗)
+          required: true
+        - label: There is no commented out code in this PR (❕)
+          required: false
+        - label: You improved or added new unit tests (❕)
+          required: false
+        - label: Local ZnunyCodePolicy passed (❕)
+          required: false
+        - label: Local UnitTests / Selenium passed (❕)
+          required: false
+        - label: GitHub workflow CI (UnitTests / Selenium) passed (❗)
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing ❤
+
+        Znuny @znuny/znuny

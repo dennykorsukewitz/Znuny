@@ -1,0 +1,268 @@
+---
+name: Feature
+description: Create a feature pull request to add new functionality to the Znuny project.
+title: "Feature - "
+labels: ["1 - 🚀 feature"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You are amazing! 🚀
+        Thanks for contributing to the Znuny community project!
+        Please, DO NOT DELETE ANY TEXT from this template (unless instructed)!
+
+        ### Licensing, copyright and credits
+
+        Znuny is an open fork of an existing software. So we have to respect the already given copyright of the original creators.
+
+        New files will be licensed using the AGPL Version 3. If you contribute code to the Znuny project you will get mentioned in the pull request incl. the commit, in CHANGES.md and in AUTHORS.md. We will not mention you in the file you provided or changed. Your work is highly appreciated and acknowledged but you contribute it to the project and your copyright will pass on to the fork itself.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: |
+        Describe the new feature that this PR implements. Include:
+        - What is the purpose of this feature?
+        - What problem does it solve?
+        - Who are the target users?
+        - What are the key benefits?
+      placeholder: |
+        **Purpose:**
+        Describe the main purpose of this feature...
+
+        **Problem solved:**
+        Explain what problem this feature addresses...
+
+        **Target users:**
+        Who will benefit from this feature?...
+
+        **Key benefits:**
+        What are the main advantages of this feature?...
+      validations:
+        required: true
+
+  - type: textarea
+    id: proposed-implementation
+    attributes:
+      label: Proposed implementation
+      description: |
+        Describe the big picture of your changes here to communicate to the
+        maintainers why this pull request should be accepted. Explain:
+        - How does the feature work?
+        - What components were added/modified?
+        - What was your implementation approach?
+        - Are there any design decisions that need to be discussed?
+      placeholder: |
+        **How it works:**
+        Explain how the feature functions...
+
+        **Components:**
+        List the components that were added/modified...
+
+        **Implementation approach:**
+        Describe your implementation strategy...
+
+        **Design decisions:**
+        Any important design decisions to discuss?...
+      validations:
+        required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story / Requirements
+      description: |
+        Describe the user story or requirements that this feature addresses:
+        - As a [type of user]
+        - I want [goal/desire]
+        - So that [benefit/value]
+      placeholder: |
+        **As a** [type of user]
+        **I want** [goal/desire]
+        **So that** [benefit/value]
+
+        **Additional requirements:**
+        List any additional requirements or acceptance criteria...
+      validations:
+        required: true
+
+  - type: textarea
+    id: technical-implementation
+    attributes:
+      label: Technical Implementation
+      description: |
+        Provide technical details about the implementation:
+        - Which files were modified/added?
+        - What database changes are required?
+        - Are there any API changes?
+        - What dependencies were added?
+        - Any configuration changes needed?
+      placeholder: |
+        **Files modified/added:**
+        - List of modified files
+        - List of new files
+
+        **Database changes:**
+        - Any new tables, columns, or migrations
+
+        **API changes:**
+        - Any new endpoints or modified APIs
+
+        **Dependencies:**
+        - Any new dependencies added
+
+        **Configuration:**
+        - Any configuration changes required
+      validations:
+        required: true
+
+  - type: textarea
+    id: screenshots-demo
+    attributes:
+      label: Screenshots / Demo
+      description: |
+        Add screenshots or describe how to demo the new feature:
+        - Screenshots of the new UI (if applicable)
+        - Steps to demonstrate the feature
+        - Before/after comparisons (if relevant)
+      placeholder: |
+        **Feature Screenshots:**
+        [Add screenshots of the new feature]
+
+        **Demo Steps:**
+        1. Go to '...'
+        2. Click on '...'
+        3. See the new feature in action
+
+        **Before/After (if applicable):**
+        [Show comparison if this replaces existing functionality]
+      validations:
+        required: false
+
+  - type: textarea
+    id: performance-impact
+    attributes:
+      label: Performance Impact
+      description: |
+        Describe any performance implications:
+        - Does this feature impact system performance?
+        - Are there any database query optimizations?
+        - Any caching strategies implemented?
+        - Load testing results (if applicable)
+      placeholder: |
+        **Performance considerations:**
+        - Impact on system performance
+        - Database query optimizations
+        - Caching strategies
+        - Load testing results
+
+        **Optimizations implemented:**
+        Describe any performance optimizations...
+      validations:
+        required: false
+
+  - type: textarea
+    id: breaking-change
+    attributes:
+      label: Breaking change
+      description: |
+        If your PR contains a breaking change, it is important
+        to tell what breaks, how to make it work again and why it is necessary.
+        This piece of text is published with the release notes, so it helps if you
+        write it for the users, not the maintainer.
+        Note: Remove this section if this PR is NOT a breaking change.
+      placeholder: |
+        If this is a breaking change, describe:
+        - What breaks
+        - How to make it work again
+        - Why it is necessary
+
+        If no breaking changes, leave this empty.
+      validations:
+        required: false
+
+  - type: textarea
+    id: migration-guide
+    attributes:
+      label: Migration Guide (if applicable)
+      description: |
+        If this feature requires any migration steps for existing users:
+        - What needs to be migrated?
+        - How can users migrate their data?
+        - Are there any backward compatibility considerations?
+      placeholder: |
+        **Migration requirements:**
+        - What needs to be migrated
+        - How to migrate data
+        - Backward compatibility considerations
+
+        **Migration steps:**
+        Step-by-step migration guide for users...
+      validations:
+        required: false
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: |
+        Details are important and help maintainers processing your PR.
+        Please be sure to fill out additional details, if applicable.
+        Note: Remove this section if not needed.
+
+        If a PR is related to an issue, please use the 'Linked issues' function on the sidebar.
+      placeholder: |
+        Additional details, related issues, or other relevant information...
+
+        Example:
+        - This PR implements feature request: #
+        - This PR is related to issue: #
+        - Related documentation: #
+        - Alternative approaches considered: #
+      validations:
+        required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        Put an 'x' in the boxes that apply. You can also fill these out after
+        creating the PR. If you're unsure about any of them, don't hesitate to ask.
+        We're here to help! This is simply a reminder of what we are going to look
+        for before merging your code.
+
+        ❕ - nice to have
+        ❗ - required before review
+      options:
+        - label: The code change is tested and works locally (❗)
+          required: true
+        - label: I have created comprehensive unit tests for the new feature (❗)
+          required: true
+        - label: I have tested the feature with different user roles and scenarios (❗)
+          required: true
+        - label: I have updated/added documentation for the new feature (❗)
+          required: true
+        - label: There is no commented out code in this PR (❕)
+          required: false
+        - label: You improved or added new unit tests (❕)
+          required: false
+        - label: Local ZnunyCodePolicy passed (❕)
+          required: false
+        - label: Local UnitTests / Selenium passed (❕)
+          required: false
+        - label: GitHub workflow CI (UnitTests / Selenium) passed (❗)
+          required: true
+        - label: I have considered backward compatibility (❕)
+          required: false
+        - label: I have tested the feature with different browsers (if applicable) (❕)
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing ❤
+
+        Znuny @znuny/znuny

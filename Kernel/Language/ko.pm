@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.831769756718079;
+    $Self->{Completeness}        = 0.831741483603948;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1543,26 +1543,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '패키지 정보',
-        'Package installation requires a patch level update of Znuny.' =>
-            '패키지를 설치하려면 Znuny의 패치 레벨 업데이트가 필요합니다. ',
-        'Package update requires a patch level update of Znuny.' => '패키지 업데이트에는 Znuny의 패치 수준 업데이트가 필요합니다. ',
-        'Please note that your installed Znuny version is %s.' => '설치된 Znuny 버전은 %s입니다.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '이 패키지를 설치하려면 Znuny를 버전 %s 이상으로 업데이트해야합니다.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '이 패키지는 Znuny 버전 %s 또는 그 이상에서만 설치할 수 있습니다.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '왜 Znuny를 최신 상태로 유지해야합니까?',
-        'You will receive updates about relevant security issues.' => '관련 보안 문제에 대한 업데이트가 제공됩니다.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '다른 모든 관련 Znuny 문제에 대한 업데이트가 제공됩니다.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '계약이 없다면 어떻게 패치 레벨 업데이트를 할 수 있습니까?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '혹시 더 궁금한 점이 있으시면 답변 해드리겠습니다.',
-        'Please visit our customer portal and file a request.' => '고객 포털을 방문하여 요청을 제출하십시오.',
+        'Package is incompatible.' => '패키지가 호환되지 않습니다.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            '설치된 Znuny 버전 %s에서는 이 패키지의 설치를 지원하지 않습니다.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            '이 패키지는 이전 버전의 Znuny가 필요하므로 설치할 수 없습니다.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            '이 패키지는 최신 버전의 Znuny가 필요하므로 설치할 수 없습니다.',
+        'What to do:' => '해야 할 일:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Znuny %s을(를) 지원하는 이 패키지의 최신 버전이 있으면 대신 해당 버전을 설치하거나 해당 버전으로 업그레이드하십시오.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Znuny %s을(를) 지원하는 이 패키지의 이전 버전이 있으면 대신 해당 버전을 설치하거나 해당 버전으로 업그레이드하십시오.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Znuny 업데이트가 필요한 경우 필요한 버전으로의 업데이트에 관한 문서를 참조하거나 지원 조직에 문의하십시오.',
         'Install Package' => '패키지 설치',
         'Update Package' => '패키지 업데이트',
         'Package' => '',
@@ -3987,6 +3981,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             '데이터베이스의 프로세스 관리 정보가 시스템 구성과 동기화되지 않았습니다. 모든 프로세스를 동기화 하십시오.',
+        'Deploy' => '배포',
         'Need ExampleProcesses!' => 'ExampleProcesses가 필요합니다!',
         'Need ProcessID!' => 'ProcessID가 필요합니다!',
         'Unknown Process %s!' => '알 수없는 프로세스 %s!',
@@ -5298,13 +5293,6 @@ sub Data {
         'Perl Modules' => '펄 모듈',
         'Not all required Perl modules are correctly installed.' => '필요한 Perl 모듈이 모두 올바르게 설치되지는 않았습니다.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => '',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => '펄 버전',
 
@@ -5537,11 +5525,12 @@ sub Data {
         'Disabled' => '불구가 된',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => '시스템이 OTRSTimeZone에서 사용자 날짜를 계산할 수 없습니다!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            '시스템은 OTRSTimeZone에서 사용자 DateTime을 계산할 수 없었습니다!',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5976,13 +5965,13 @@ sub Data {
             '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 상담원이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 고객이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => '이 설정은 사용되지 않습니다. 대신 OTRSTimeZone을 설정하십시오.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             'Znuny에 의해 내부적으로 사용되는 시간대를 e로 설정합니다. 지. 날짜와 시간을 데이터베이스에 저장하십시오. 경고 :이 설정은 일단 설정하고 티켓 또는 날짜 / 시간이 포함 된 다른 데이터를 작성한 후에 변경하면 안됩니다.',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '새로 생성 된 사용자에게 할당되고 아직 시간대를 설정하지 않은 사용자에게 사용될 시간대를 설정합니다. 이 시간대는 Znuny 시간대와 사용자 시간대 사이의 날짜와 시간을 변환하기 위해 기본값으로 사용됩니다.',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            '사용하도록 설정하면 아직 시간대를 선택하지 않은 사용자에게 알림이 전송됩니다. 참고 : (1) 사용자가 아직 시간대를 선택하지 않았으며 (2) OTRSTimeZone과 UserDefaultTimeZone이 일치하고 (3) UTC로 설정되지 않은 경우 알림이 표시되지 않습니다.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => '드롭 다운에 표시된 최대 달력 수입니다.',
         'Define the start day of the week for the date picker.' => '날짜 선택 도구의 시작 요일을 정의하십시오.',
         'Adds the permanent vacation days.' => '영구 휴가 일을 추가합니다.',
@@ -6577,6 +6566,8 @@ sub Data {
         'Updates the ticket index accelerator.' => '티켓 인덱스 가속기를 업데이트 합니다.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             '다른 대기열로 이동된 티켓의 소유자를 재설정하고 잠금 해제합니다.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            '다른 대기열로 이동된 티켓의 책임자를 재설정합니다.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             '잠금 조치 후 다른 티켓 상태 (현재 상태에서)를 강제로 선택합니다. 현재 상태를 키로 정의하고, 잠금 조치 후 다음 상태를 내용으로 정의하십시오.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8484,7 +8475,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '검색할 단어를 하나 이상 입력하십시오.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '안타깝게도 다른 에이전트가 이미 배포 중이므로 현재 배포할 수 없습니다. 나중에 다시 시도 해주십시오.',
-        'Deploy' => '배포',
         'The deployment is already running.' => '배포가 이미 실행 중입니다.',
         'Deployment successful. You\'re being redirected...' => '배포가 완료되었습니다. 리디렉션 중입니다...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.591667991731595;
+    $Self->{Completeness}        = 0.59360076408787;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1549,26 +1549,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'در مورد شما می سوال بیشتر دارند ما خوشحال خواهد بود به آنها پاسخ دهد.',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'بسته ناسازگار است.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'نسخه نصب‌شده Znuny شما (%s) از نصب این بسته پشتیبانی نمی‌کند.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'این بسته قابل نصب نیست زیرا به نسخه قدیمی‌تری از Znuny نیاز دارد.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'این بسته قابل نصب نیست زیرا به نسخه جدیدتری از Znuny نیاز دارد.',
+        'What to do:' => 'چه باید کرد:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'اگر نسخه جدیدتری از این بسته وجود دارد که از Znuny %s پشتیبانی می‌کند، به جای آن، آن را نصب کنید یا به آن ارتقا دهید.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'اگر نسخه قدیمی‌تری از این بسته وجود دارد که از Znuny %s پشتیبانی می‌کند، به جای آن، آن را نصب کنید یا به آن ارتقا دهید.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'اگر به‌روزرسانی Znuny لازم است، مستندات مربوط به به‌روزرسانی به نسخه مورد نیاز را مطالعه کنید یا با سازمان پشتیبانی خود تماس بگیرید.',
         'Install Package' => 'نصب بسته',
         'Update Package' => '',
         'Package' => '',
@@ -3993,6 +3987,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'اطلاعات مدیریت فرآیند از پایگاه اطلاع داده هماهنگ با پیکربندی سیستم نیست، لطفا تمام فرآیندها را همگام سازی کنید.',
+        'Deploy' => '',
         'Need ExampleProcesses!' => 'نیاز ExampleProcesses!',
         'Need ProcessID!' => 'نیاز ProcessID!',
         'Unknown Process %s!' => 'فرایند ناشناخته %s !',
@@ -5304,13 +5299,6 @@ sub Data {
         'Perl Modules' => 'ماژول پرل',
         'Not all required Perl modules are correctly installed.' => 'همه ماژول های مورد نیاز پرل به درستی نصب نشده است.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => '',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'پرل نسخه',
 
@@ -5543,10 +5531,11 @@ sub Data {
         'Disabled' => '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => '',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
             '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
@@ -5982,12 +5971,12 @@ sub Data {
             '',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => '',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '',
         'Maximum Number of a calendar shown in a dropdown.' => 'حداکثر تعداد یک تقویم نشان داده شده در منوی کرکره ای.',
         'Define the start day of the week for the date picker.' => 'تعریف روز شروع هفته برای جمع کننده اطلاعات.',
@@ -6583,6 +6572,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'به روز رسانی شتاب دهنده شاخص درخواست',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'بازنشانی و بازکردن دسترسی صاحب یک درخواست اگر آن را به صف دیگری انتقال داده.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'بازنشانی مسئول یک درخواست اگر آن را به صف دیگری انتقال داده.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'نیروهای به انتخاب یک دولت بلیط مختلف (از فعلی) بعد از عمل قفل. تعریف وضعیت فعلی به عنوان کلید، و دولت بعدی پس از عمل قفل به عنوان محتوا.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8490,7 +8481,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => '',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => '',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

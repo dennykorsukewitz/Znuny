@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.836380982668151;
+    $Self->{Completeness}        = 0.836198662846227;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -963,13 +963,13 @@ sub Data {
         'Invoker Details' => 'Подробности для Invoker ',
         'The name is typically used to call up an operation of a remote web service.' =>
             'Имя обычно используется для вызова операции удаленного веб-сервиса.',
-        'Invoker backend' => 'Invoker бэкэнд',
+        'Invoker backend' => 'Модуль инициатора вызова (invoker)',
         'This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
-            'Этот модуль Znuny invoker будет вызываться для подготовки данных, отправляемых в удаленную систему и для обработки ответных данных.',
-        'Mapping for outgoing request data' => 'Соответствие исходящему запросу данных',
+            'Этот Znuny модуль инициатора вызова (invoker) будет вызываться как для подготовки данных, отправляемых в удаленную систему, так и для обработки ответных данных.',
+        'Mapping for outgoing request data' => 'Преобразование данных исходящего запроса',
         'Configure' => 'Конфигурировать',
         'The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
-            'Данные полученные от инициатора вызова (invoker) Znuny будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат.',
+            'Данные, полученные от инициатора вызова (invoker) Znuny, будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат.',
         'Mapping for incoming response data' => 'Соответствие входящим ответным данным',
         'The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.' =>
             'Данные ответа будут преобразованы с использованием этого соответствия в формат, ожидаемый инициатором вызова (invoker) Znuny.',
@@ -1117,7 +1117,7 @@ sub Data {
         'Operation backend' => 'Бэкэнд для операций',
         'This Znuny operation backend module will be called internally to process the request, generating data for the response.' =>
             'Этот модуль Znuny будет вызываться для обработки запроса и подготавливать данные для ответа.',
-        'Mapping for incoming request data' => 'Сопоставление для данных входящего запроса',
+        'Mapping for incoming request data' => 'Преобразование данных входящего запроса',
         'The request data will be processed by this mapping, to transform it to the kind of data Znuny expects.' =>
             'Запрашиваемые данные будут обработаны и преобразованы в формат поддерживаемый Znuny',
         'Mapping for outgoing response data' => 'Сопоставление данных для исходящего ответа',
@@ -1555,26 +1555,20 @@ sub Data {
         'Go to updating instructions' => 'Перейдите к инструкциям по обновлению',
         'Go to znuny.org' => '',
         'package information' => 'Информация о пакете',
-        'Package installation requires a patch level update of Znuny.' =>
-            'Установка пакета требует обновления уровня патчей Znuny.',
-        'Package update requires a patch level update of Znuny.' => 'Обновление пакета требует обновления уровня патчей Znuny.',
-        'Please note that your installed Znuny version is %s.' => 'Установлена Znuny версии %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Для установки пакета необходимо обновить Znuny до версии %s или выше.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Этот пакет может быть установлен для версий Znuny не выше %s.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'Почему я должен постоянно обновлять Znuny?',
-        'You will receive updates about relevant security issues.' => 'Вы получите обновления о соответствующих выпусках безопасности.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Вы получите обновления для всех других соответствующих вопросов Znuny.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Как я могу выполнить обновление уровня патч если у меня нет контракта?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Пожалуйста, найдите всю соответствующую информацию в инструкциях по обновлению здесь %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'В случае, если у Вас возникли вопросы, мы будем рады ответить на них.',
-        'Please visit our customer portal and file a request.' => 'Посетите наш клиентский портал и отправьте запрос.',
+        'Package is incompatible.' => 'Пакет несовместим.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Установленная версия Znuny %s не поддерживает установку этого пакета.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Пакет не может быть установлен, так как для него требуется более старая версия Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Пакет не может быть установлен, так как для него требуется более новая версия Znuny.',
+        'What to do:' => 'Что делать:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Если существует более новая версия этого пакета, поддерживающая Znuny %s, установите её или обновитесь до неё.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Если существует более старая версия этого пакета, поддерживающая Znuny %s, установите её или обновитесь до неё.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Если требуется обновление Znuny, ознакомьтесь с документацией по обновлению до требуемой версии или обратитесь в вашу службу поддержки.',
         'Install Package' => 'Установить пакет',
         'Update Package' => 'Обновить пакет',
         'Package' => '',
@@ -3557,7 +3551,7 @@ sub Data {
         'There was an error synchronizing the ACLs.' => 'Произошла ошибка при синхронизации ACL.',
         'ACL %s could not be deleted' => 'Невозможно удалить ACL %s',
         'There was an error getting data for ACL with ID %s' => 'Произошла ошибка при получении данный от ACL с ID %s',
-        '%s (copy) %s' => '%s (копия) %s ',
+        '%s (copy) %s' => '%s (копия) %s',
         'Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).' =>
             'Обратите внимание, что для аккаунта Superuser (UserID 1) ограничения ACL игнорируются.',
         'Exact match' => 'Полное совпадение',
@@ -3999,6 +3993,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Информация по управлению процессами из базы данных не синхронизирована с системой, выполните синхронизацию всех процессов.',
+        'Deploy' => 'Применить',
         'Need ExampleProcesses!' => 'Требуется ExampleProcesses!',
         'Need ProcessID!' => 'Требуется ProcessID!',
         'Unknown Process %s!' => 'Неизвестный Процесс %s!',
@@ -4200,7 +4195,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminSystemFiles.pm
         'Package files - %s' => '',
         '(Files where only the permissions have been changed will not be displayed.)' =>
-            '',
+            '(Файлы, у которых были изменены только права доступа, отображаться не будут.)',
 
         # Perl Module: Kernel/Modules/AdminSystemMaintenance.pm
         'Start date shouldn\'t be defined after Stop date!' => 'Начальная дата не может быть задана позднее даты окончания!',
@@ -5310,13 +5305,6 @@ sub Data {
         'Perl Modules' => 'Модули Perl',
         'Not all required Perl modules are correctly installed.' => 'Не все требуемые модули Perl установлены корректно.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Аудит модулей Perl',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Версия Perl',
 
@@ -5549,11 +5537,12 @@ sub Data {
         'Disabled' => 'Отключено',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'Системе не удалось вычислить дату пользователя в OTRSTimeZone!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            'Системе не удалось вычислить DateTime пользователя в OTRSTimeZone!',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5988,13 +5977,13 @@ sub Data {
             '',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             'Задает интервал времени (в минутах), после которого клиент будет помечен как "отсутствующий", потому как неактивен (например в "Залогированные Пользователи" виджете или в чате).',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Этот параметр устарел. Вместо него используйте OTRSTimeZone.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            'Если включено, пользователи, еще не выбравшие временную зону, будут уведомлены сделать это. Примечание: Уведомление будет показано если (1) пользователь еще не выбрал временную зону и (2) OTRSTimeZone совпадает с UserDefaultTimeZone и (3) они не установлены в UTC.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Укажите первый день недели для использовании при выборе даты',
         'Adds the permanent vacation days.' => 'Добавляет постоянные дни отпуска.',
@@ -6589,6 +6578,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Обновляет ticket index accelerator.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Сбрасывает Владельца и разблокирует заявку при перемещении ее в другую очередь.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Сбрасывает Ответственного заявки при перемещении ее в другую очередь.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Принудительно устанавливать новое состояние (отличное от текущего) поcле блокирования заявки. Задайте текущее состояние как Ключ и следующее состояние как Содержимое.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8496,7 +8487,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Для поиска введите хотя бы одно слово.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'К сожалению, сохранение в настоящий момент невозможно, возможно, это связано с тем, что другой агент уже работает с настройками. Попробуйте, пожалуйста, позже.',
-        'Deploy' => 'Применить',
         'The deployment is already running.' => 'Процесс применения уже идет.',
         'Deployment successful. You\'re being redirected...' => 'Применение завершено успешно. Вы будете перенаправлены...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

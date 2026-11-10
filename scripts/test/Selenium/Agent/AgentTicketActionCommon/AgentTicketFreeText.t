@@ -19,7 +19,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 my $WaitForAJAX = sub {
     $Selenium->WaitFor(
         JavaScript =>
-            'return typeof($) === "function" && !$("span.AJAXLoader:visible").length'
+            'return typeof($) === "function" && $.active == 0 && !$("span.AJAXLoader:visible").length'
     );
 };
 
@@ -324,8 +324,12 @@ $Selenium->RunTest(
                         "FieldID $FieldID exists",
                     );
                     if ( $CheckFields eq 'Mandatory' ) {
+
+                        # InputFields points the label at "<id>_Search" after the select is modernized.
                         $Self->Is(
-                            $Selenium->execute_script("return \$('label[for=$FieldID].Mandatory').length;"),
+                            $Selenium->execute_script(
+                                "return \$('label[for=\"$FieldID\"].Mandatory, label[for=\"${FieldID}_Search\"].Mandatory').length;"
+                            ),
                             1,
                             "FieldID $FieldID is mandatory",
                         );
@@ -457,6 +461,23 @@ $Selenium->RunTest(
                 );
 
                 # Wait for AJAX to finish.
+                $WaitForAJAX->();
+            }
+
+            # State changes rebuild dependent selects and can drop SLA.
+            # Restore service and SLA so the successful submit is not blocked
+            # by an empty required SLA.
+            if ( !$ExpectedErrorFieldID ) {
+                $Selenium->InputFieldValueSet(
+                    Element => '#ServiceID',
+                    Value   => $ServiceID,
+                );
+                $WaitForAJAX->();
+
+                $Selenium->InputFieldValueSet(
+                    Element => '#SLAID',
+                    Value   => $SLAID,
+                );
                 $WaitForAJAX->();
             }
 

@@ -20,5 +20,6 @@ apt-get install -y libapache2-mod-perl2 \
   libssl-dev libxml2-dev zlib1g-dev \
   apache2 gnupg2 mariadb-client cpanminus make gcc git npm gettext gnupg
 
-# Net::SAML2 (no Debian/Ubuntu package, install via CPAN)
-cpanm --notest Net::SAML2
+# Net::SAML2 (no Debian/Ubuntu package, install via CPAN).
+# 0.89 or higher is required so assertion signatures are verified against the IdP certificate.
+cpanm --notest Net::SAML2@0.89

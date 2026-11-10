@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.859119096835745;
+    $Self->{Completeness}        = 0.858484559057625;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1550,26 +1550,20 @@ sub Data {
         'Go to updating instructions' => '转到升级说明',
         'Go to znuny.org' => '',
         'package information' => '软件包信息',
-        'Package installation requires a patch level update of Znuny.' =>
-            '安装软件包需要将Znuny补丁级别更新。',
-        'Package update requires a patch level update of Znuny.' => '升级软件包需要将Znuny补丁级别更新。',
-        'Please note that your installed Znuny version is %s.' => '请注意，您安装的Znuny版本是%s。',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '安装这个软件包，你需要升级Znuny版本到%s或者更高。',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '这个软件包只能安装在Znuny版本%s或者更低。',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '为什么要保持Znuny是最新的？',
-        'You will receive updates about relevant security issues.' => '您将收到有关安全问题的更新。',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '你将收到所有其他有关Znuny问题的更新。',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '如果没有合约，我怎么更新补丁级别？',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '请在升级说明%s中查找所有相关的信息。',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '如果您还有其它问题，我们非常愿意答复您。',
-        'Please visit our customer portal and file a request.' => '请访问我们的客户门户并提出请求。',
+        'Package is incompatible.' => '软件包不兼容。',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            '您安装的 Znuny 版本 %s 不支持安装此软件包。',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            '无法安装此软件包，因为它需要较旧版本的 Znuny。',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            '无法安装此软件包，因为它需要较新版本的 Znuny。',
+        'What to do:' => '处理方法：',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            '如果存在支持 Znuny %s 的此软件包的较新版本，请改为安装或升级到该版本。',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            '如果存在支持 Znuny %s 的此软件包的较旧版本，请改为安装或升级到该版本。',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            '如果需要更新 Znuny，请查阅有关更新到所需版本的文档，或联系您的支持机构。',
         'Install Package' => '安装软件包',
         'Update Package' => '更新软件包',
         'Package' => '',
@@ -3994,6 +3988,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             '数据库中的流程管理信息与系统配置不一致，请同步所有流程。',
+        'Deploy' => '部署',
         'Need ExampleProcesses!' => '需要ExampleProcesses！',
         'Need ProcessID!' => '需要流程ID！',
         'Unknown Process %s!' => '未知的流程 %s！',
@@ -5305,13 +5300,6 @@ sub Data {
         'Perl Modules' => 'Perl 模块',
         'Not all required Perl modules are correctly installed.' => '部分Perl模块没有正确安装。',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Perl 模块 Audit',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'CPAN::Audit 报告一个或多个已安装的 Perl 模块是否存在已知漏洞。 请注意，在不更改版本号的情况下修补Perl模块的发行版可能存在误报。',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '在已安装的Perl模块中 CPAN::Audit 未报告出任何已知漏洞。',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl版本',
 
@@ -5544,11 +5532,12 @@ sub Data {
         'Disabled' => '已禁用',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => '系统无法在OTRSTimeZone中计算用户的日期！',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            '系统无法在OTRSTimeZone中计算用户的日期时间！',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5983,13 +5972,13 @@ sub Data {
             '定义由于不活动而将服务人员标记为“离开”的时间（单位：分钟）（例如：在“已登录的用户”小部件或聊天中）。',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '定义由于不活动而将客户标记为“离开”的时间（单位：分钟）（例如：在“已登录的用户”小部件或聊天中）。',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => '此设置已弃用。 替代方式是设置OTRSTimeZone。',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '将Znuny内部使用的时区设置如在数据库中存储日期和时间。 警告：此设置一旦设置就不能更改，包含日期/时间的工单或其他数据已据此创建。',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '设置将分配给新创建的用户的时区，并将用于尚未设置时区的用户。 这是默认使用的时区，用于转换Znuny时区与用户时区之间的日期和时间。',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            '如果启用，那么尚未选择时区的用户将被通知选择时区。 注意：如果（1）用户尚未选择时区，并且（2）OTRSTimeZone和UserDefaultTimeZone相同，（3）未设置为UTC，则不会显示通知。',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => '一个日历显示在下拉选择框中的最大数字。',
         'Define the start day of the week for the date picker.' => '定义日期选择器中一周的起始日。',
         'Adds the permanent vacation days.' => '添加永久假期。',
@@ -6584,6 +6573,8 @@ sub Data {
         'Updates the ticket index accelerator.' => '更新工单索引加速器。',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             '如果工单转移到另一个队列，重置并解锁工单所有者。',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            '如果工单转移到另一个队列，重置工单负责人。',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             '工单锁定后强制选择与当前不同的另一个工单状态，定义键为当前状态，值为锁定后的下一个工单状态。',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8491,7 +8482,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '请输入至少一个搜索词以查找任何内容。',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '很遗憾，现在不能开始部署，也许是因为另一个服务人员已经开始部署了。 请稍后再试。',
-        'Deploy' => '部署',
         'The deployment is already running.' => '部署已经在运行。',
         'Deployment successful. You\'re being redirected...' => '部署成功。 您正在重定向...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

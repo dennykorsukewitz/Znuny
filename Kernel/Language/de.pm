@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.999522976625855;
+    $Self->{Completeness}        = 1;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1544,26 +1544,20 @@ sub Data {
         'Go to updating instructions' => 'Gehe zur Update-Anweisung',
         'Go to znuny.org' => 'znuny.org aufrufen',
         'package information' => 'Paketinformation',
-        'Package installation requires a patch level update of Znuny.' =>
-            'Paketinstallation benötigt ein Patchlevel-Update von Znuny.',
-        'Package update requires a patch level update of Znuny.' => 'Paket-Update benötigt ein Patchlevel-Update von Znuny.',
-        'Please note that your installed Znuny version is %s.' => 'Bitte beachten Sie, dass Ihre installierte Znuny-Version %s ist.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Um dieses Paket zu installieren, müssen Sie zunächst Znuny auf Version %s oder neuer aktualisieren.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Dieses Paket kann nur mit Znuny-Version %s oder älter verwendet werden.',
-        'This package can only be installed on Znuny version %s.' => 'Dieses Paket kann nur mit Znuny-Version %s verwendet werden.',
-        'Why should I keep Znuny up to date?' => 'Warum sollte ich Znuny aktuell halten?',
-        'You will receive updates about relevant security issues.' => 'Sie erhalten Updates über relevante Sicherheitsprobleme.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Sie erhalten Updates für alle anderen relevanten Probleme im Zusammenhang mit Znuny.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Wie kann ich ein Patchlevel-Update durchführen, wenn ich keinen Vertrag habe?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Bitte entnehmen Sie alle relevanten Informationen der Update-Anweisung auf %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'Sollten Sie weitere Fragen haben, freuen wir uns, diese zu beantworten.',
-        'Please visit our customer portal and file a request.' => 'Bitte besuchen Sie unser Kundenportal und eröffnen Sie eine Anfrage.',
+        'Package is incompatible.' => 'Paket ist inkompatibel.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Ihre installierte Znuny-Version %s unterstützt die Installation dieses Pakets nicht.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Das Paket kann nicht installiert werden, da es eine ältere Znuny-Version voraussetzt.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Das Paket kann nicht installiert werden, da es eine neuere Znuny-Version voraussetzt.',
+        'What to do:' => 'Vorgehensweise:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Falls es eine neuere Version dieses Pakets gibt, die Znuny %s unterstützt, installieren Sie stattdessen diese bzw. aktualisieren Sie auf diese.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Falls es eine ältere Version dieses Pakets gibt, die Znuny %s unterstützt, installieren Sie stattdessen diese bzw. aktualisieren Sie auf diese.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Falls ein Znuny-Update erforderlich ist, lesen Sie die Dokumentation zum Update auf die benötigte Version oder wenden Sie sich an Ihre Support-Organisation.',
         'Install Package' => 'Paket installieren',
         'Update Package' => 'Paket Aktualisieren',
         'Package' => 'Paket',
@@ -3988,6 +3982,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Die Konfiguration des Prozessmanagements in der Datenbank ist nicht synchron mit der Systemkonfiguration, bitte synchronisieren Sie alle Prozesse.',
+        'Deploy' => 'In Betrieb nehmen',
         'Need ExampleProcesses!' => 'Benötige Beispiel-Prozesse!',
         'Need ProcessID!' => 'Benötige ProcessID!',
         'Unknown Process %s!' => 'Unbekannter Prozess %s!',
@@ -5299,13 +5294,6 @@ sub Data {
         'Perl Modules' => 'Perlmodule',
         'Not all required Perl modules are correctly installed.' => 'Es sind nicht alle benötigten Perl-Module installiert.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Perl Module Audit',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'CPAN::Audit hat berichtet, dass ein oder mehrere installierte Perl-Module bekannte Schwachstellen aufweisen. Bitte beachten Sie, dass es möglicherweise falsche Positivmeldungen für Distributionen gibt, die Perl-Module patchen, ohne ihre Versionsnummer zu ändern.',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            'CPAN::Audit hat keine bekannten Schwachstellen in den installierten Perl-Modulen gemeldet.',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl-Version',
 
@@ -5538,10 +5526,11 @@ sub Data {
         'Disabled' => 'Deaktiviert',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'Das Datum des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            'Das Datum des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
             'Das Datum und die Uhrzeit des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
@@ -5977,13 +5966,13 @@ sub Data {
             'Legt den Zeitraum in Minuten fest, bevor ein Agent aufgrund von Inaktivität als "abwesend" markiert wird (z. B. im "Angemeldete Nutzer"-Dashlet oder im Chat).',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             'Legt den Zeitraum in Minuten fest, bevor ein Kunde aufgrund von Inaktivität als "abwesend" markiert wird (z. B. im "Angemeldete Nutzer"-Dashlet oder im Chat).',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Diese Einstellung ist veraltet. Bitte nutzen Sie stattdessen die Einstellung OTRSTimeZone.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => 'Diese Einstellung ist veraltet. Bitte nutzen Sie stattdessen die Einstellung ZnunyTimeZone.',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             'Legt die Zeitzone fest, die intern von Znuny genutzt werden soll (z. B. um Datumsangaben und Zeiten in der Datenbank zu speichern). ACHTUNG: Diese Einstellung darf nicht mehr geändert werden, sobald Tickets und/oder andere Objekte erstellt wurden, die Datumsangaben enthalten.',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             'Legt die Zeitzone fest, die als Voreinstellung für neu angelegte Nutzer gelten soll. Diese Zeitzone wird dazu verwendet, um Datumsangaben und Uhrzeiten zwischen der Znuny-Zeitzone und der Nutzer-Zeitzone korrekt zu konvertieren.',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            'Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgewählt haben, benachrichtigt dies zu tun. Hinweis: Die Benachrichtigung wird nicht angezeigt, wenn (1) der Benutzer noch keine Zeitzone ausgewählt hat und (2) OTRSTimeZone und UserDefaultTimeZone identisch sind und (3) nicht auf UTC gesetzt sind.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            'Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgewählt haben, benachrichtigt dies zu tun. Hinweis: Die Benachrichtigung wird nicht angezeigt, wenn (1) der Benutzer noch keine Zeitzone ausgewählt hat und (2) ZnunyTimeZone und UserDefaultTimeZone identisch sind und (3) nicht auf UTC gesetzt sind.',
         'Maximum Number of a calendar shown in a dropdown.' => 'Maximale Anzahl an Kalendern, die in Auswahlmenüs angezeigt werden.',
         'Define the start day of the week for the date picker.' => 'Definiert den Beginn einer Woche für den Datumswähler.',
         'Adds the permanent vacation days.' => 'Fügt die dauerhaften Urlaubstage hinzu.',
@@ -6578,6 +6567,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Aktualisiert den Ticket-Index-Beschleuniger.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Setzt den Besitzer eines TIckets zurück und entsperrt es, wenn das Ticket in eine andere Queue verschoben wird.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Setzt den Verantwortlichen eines TIckets zurück, wenn das Ticket in eine andere Queue verschoben wird.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Erzwingt das Setzen eines (vom aktuellen Status) abweichenden Ticket-Status nach dem Sperren eines Tickets. Legen Sie den aktuellen Status als Schlüssel und den neuen Status als Inhalt fest.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8485,7 +8476,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Bitte geben Sie mindestens einen Suchbegriff ein.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Inbetriebnahme derzeit nicht möglich. Möglicherweise läuft bereits eine durch einen anderen Agenten angestoßene Inbetriebnahme. Bitte versuchen Sie es später noch einmal.',
-        'Deploy' => 'In Betrieb nehmen',
         'The deployment is already running.' => 'Inbetriebnahme läuft bereits.',
         'Deployment successful. You\'re being redirected...' => 'Inbetriebnahme erfolgreich, sie werden weitergeleitet...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>
@@ -8830,11 +8820,11 @@ Ihr Helpdesk-Team
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi-Arabien)',
         'Article Color' => 'Artikel Farbe',
         'ArticleTree' => 'Artikelbaum',
-        'As Popup' => '',
+        'As Popup' => 'Als Popup',
         'Attachment Name' => 'Name des Anhangs',
         'Avatar' => 'Avatar',
         'Based on global RichText setting' => 'Basierend auf der globalen Richtext-Einstellung',
-        'Blank' => '',
+        'Blank' => 'Neues Fenster',
         'Bounced to "%s".' => 'Bounced an "%s".',
         'Bulgarian' => 'Bulgarisch',
         'Bulk Action' => 'Sammel-Aktion',
@@ -9296,7 +9286,7 @@ Ihr Helpdesk-Team
             'Wählen Sie Ihre persönliche Zeitzone aus. Alle Zeiten werden relativ zur eingestellten Zeitzone angezeigt.',
         'Select your preferred layout for the software.' => 'Wählen Sie Ihr bevorzugtes Layout aus.',
         'Select your preferred theme for OTRS.' => 'Wählen Sie Ihr bevorzugtes Theme für Znuny.',
-        'Self' => '',
+        'Self' => 'Gleiches Fenster',
         'Send a unit test file' => 'Unit-Test-Datei versenden',
         'Send new outgoing mail from this ticket' => 'Neue ausgehende E-Mail aus diesem Ticket heraus senden',
         'Send notifications to users.' => 'Benachrichtigungen an Agenten verschicken.',

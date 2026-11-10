@@ -22,10 +22,10 @@ $Selenium->RunTest(
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-        # Set OTRSTimeZone to UTC.
+        # Set ZnunyTimeZone to UTC.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'OTRSTimeZone',
+            Key   => 'ZnunyTimeZone',
             Value => 'UTC',
         );
 
@@ -121,8 +121,12 @@ $Selenium->RunTest(
         # Check displayed date and time values.
         for my $FieldGroup (qw(Start End)) {
             for my $FieldType (qw(Year Month Day)) {
+
+                # Modernize hides the select. WebDriver get_value() on that node is empty.
                 $Self->Is(
-                    int $Selenium->find_element( "#OutOfOffice$FieldGroup$FieldType", 'css' )->get_value(),
+                    int $Selenium->execute_script(
+                        "return \$('#OutOfOffice$FieldGroup$FieldType').val();"
+                    ),
                     int $Date->{$FieldType},
                     "Shown OutOfOffice$FieldGroup$FieldType field value"
                 );

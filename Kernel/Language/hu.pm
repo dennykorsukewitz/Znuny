@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999522976625855;
+    $Self->{Completeness}        = 0.999363260108246;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1549,26 +1549,20 @@ sub Data {
         'Go to updating instructions' => 'Ugrás a frissítési utasításokhoz',
         'Go to znuny.org' => 'Ugrás a znuny.org webhelyre',
         'package information' => 'csomaginformációk',
-        'Package installation requires a patch level update of Znuny.' =>
-            'A csomagtelepítés a Znuny hibajavító szintű frissítését igényli.',
-        'Package update requires a patch level update of Znuny.' => 'A csomagfrissítés a Znuny hibajavító szintű frissítését igényli.',
-        'Please note that your installed Znuny version is %s.' => 'Ne feledje, hogy a telepített Znuny verziója %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'A csomag telepítéséhez frissítenie kell a Znunyt %s vagy újabb verzióra.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Ez a csomag csak a Znuny %s vagy régebbi verziójára telepíthető.',
-        'This package can only be installed on Znuny version %s.' => 'Ez a csomag csak a Znuny %s verziójára telepíthető.',
-        'Why should I keep Znuny up to date?' => 'Miért kell naprakészen tartanom a Znunyt?',
-        'You will receive updates about relevant security issues.' => 'Frissítéseket fog kapni a fontos biztonsági problémákról.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Frissítéseket fog kapni minden egyéb fontos Znuny problémáról.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Hogyan végezhetek hibajavító szintű frissítést, ha nincs szerződésem?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Nézze meg az összes fontos információt a frissítési utasításokban itt: %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'Abban az esetben, ha további kérdései vannak, szívesen megválaszoljuk azokat.',
-        'Please visit our customer portal and file a request.' => 'Látogassa meg az ügyfélportálunkat, és küldjön egy kérést.',
+        'Package is incompatible.' => 'A csomag nem kompatibilis.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'A telepített Znuny verzió (%s) nem támogatja ennek a csomagnak a telepítését.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'A csomag nem telepíthető, mert a Znuny egy régebbi verzióját igényli.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'A csomag nem telepíthető, mert a Znuny egy újabb verzióját igényli.',
+        'What to do:' => 'Teendők:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ha létezik ennek a csomagnak egy újabb verziója, amely támogatja a Znuny %s verziót, akkor inkább azt telepítse, vagy arra frissítsen.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ha létezik ennek a csomagnak egy régebbi verziója, amely támogatja a Znuny %s verziót, akkor inkább azt telepítse, vagy arra frissítsen.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Ha a Znuny frissítése szükséges, akkor olvassa el a szükséges verzióra történő frissítés dokumentációját, vagy vegye fel a kapcsolatot a támogatási szervezetével.',
         'Install Package' => 'Csomag telepítése',
         'Update Package' => 'Csomag frissítése',
         'Package' => 'Csomag',
@@ -3993,6 +3987,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Az adatbázis folyamatkezelő információi nincsenek szinkronizálva a rendszer beállításaival, szinkronizáljon minden folyamatot.',
+        'Deploy' => 'Üzembe állítás',
         'Need ExampleProcesses!' => 'Példafolyamatok szükségesek!',
         'Need ProcessID!' => 'Folyamatazonosító szükséges!',
         'Unknown Process %s!' => 'Ismeretlen folyamat: %s!',
@@ -5304,13 +5299,6 @@ sub Data {
         'Perl Modules' => 'Perl-modulok',
         'Not all required Perl modules are correctly installed.' => 'Nincs minden szükséges Perm-modul megfelelően telepítve.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Perl-modulok vizsgálata',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'A CPAN::Audit azt jelentette, hogy egy vagy több telepített Perl-modul ismert sebezhetőséggel rendelkezik. Ne feledje, hogy lehetnek tévesen jelzett jelentések is azoknál a disztribúcióknál, amelyek úgy foltozzák a Perl-modulokat, hogy nem változtatják meg a verziószámokat.',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            'A CPAN::Audit nem jelentett semmilyen ismert sebezhetőséget a telepített Perl modulokban.',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl verzió',
 
@@ -5543,11 +5531,12 @@ sub Data {
         'Disabled' => 'Letiltva',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'A rendszer nem volt képes kiszámítani a felhasználó dátumát az OTRS időzónájában!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            'A rendszer nem volt képes kiszámítani a felhasználó dátumát és idejét az OTRS időzónájában!',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5982,13 +5971,13 @@ sub Data {
             'Meghatározza azt az időtartamot (percben), mielőtt az ügyintéző „távol” lesz inaktivitás miatt (például a „Bejelentkezett felhasználók” felületi elemben vagy a csevegésnél).',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             'Meghatározza azt az időtartamot (percben), mielőtt az ügyfél „távol” lesz inaktivitás miatt (például a „Bejelentkezett felhasználók” felületi elemben vagy a csevegésnél).',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Ez a beállítás elavult. Állítsa be az OTRSTimeZone beállítást helyette.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             'Beállítja a Znuny által belsőleg használt időzónát, hogy például dátumokat és időket tároljon az adatbázisban. FIGYELEM: ezt a beállítást nem szabad megváltoztatni, miután beállították, és jegyek vagy bármilyen dátumot és időt tartalmazó egyéb adatok létrejöttek.',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             'Beállítja az időzónát, amely hozzá lesz rendelve az újonnan létrehozott felhasználókhoz, valamint olyan felhasználóknál lesz használva, akiknek még nincs beállított időzónájuk. Ez az alapértelmezetten használt időzóna a Znuny időzónája és a felhasználó időzónája közötti dátum és idő átalakításához.',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            'Ha engedélyezve van, akkor azok a felhasználók, akik még nem választottak időzónát, értesítve lesznek, hogy válasszanak. Megjegyzés: az értesítés nem lesz megjelenítve, ha (1) a felhasználó még nem választott időzónát és (2) az OTRS időzónája, valamint a felhasználó alapértelmezett időzónája megegyezik és (3) nincsenek UTC-re állítva.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => 'Egy legördülőben megjelenített naptár legnagyobb száma.',
         'Define the start day of the week for the date picker.' => 'A hét kezdőnapjának meghatározása a dátumválasztónál.',
         'Adds the permanent vacation days.' => 'Hozzáadja az állandó munkaszüneti napokat.',
@@ -6583,6 +6572,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Frissíti a jegyindex gyorsítót.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Visszaállítja és feloldja egy jegy tulajdonosát, ha az egy másik várólistába lett áthelyezve.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Visszaállítja egy jegy felelősét, ha az egy másik várólistába lett áthelyezve.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Egy másik jegyállapot (az aktuálisból) kiválasztását kényszeríti a zárolás művelet után. Az aktuális állapotot kulcsként határozza meg, és a zárolás művelet utáni következő állapotot tartalomként.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8490,7 +8481,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Adjon meg legalább egy keresőszót, ha bármire rá szeretne keresni.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Sajnálatos módon az üzembe állítás jelenleg nem lehetséges, mert talán egy másik ügyintéző már üzembe állította. Próbálja meg később újra.',
-        'Deploy' => 'Üzembe állítás',
         'The deployment is already running.' => 'Az üzembe állítás már fut.',
         'Deployment successful. You\'re being redirected...' => 'Az üzembe állítás sikerült. Most átirányítjuk…',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>
@@ -8836,11 +8826,11 @@ Az Ön ügyfélszolgálati csapata
         'Arabic (Saudi Arabia)' => 'Arab (Szaúd-Arábia)',
         'Article Color' => 'Bejegyzés színe',
         'ArticleTree' => 'Bejegyzés fa',
-        'As Popup' => '',
+        'As Popup' => 'Felugróként',
         'Attachment Name' => 'Melléklet neve',
         'Avatar' => 'Profilkép',
         'Based on global RichText setting' => 'Globális RichText beállítás alapján',
-        'Blank' => '',
+        'Blank' => 'Üres',
         'Bounced to "%s".' => 'Átirányítva ide: „%s”.',
         'Bulgarian' => 'Bolgár',
         'Bulk Action' => 'Tömeges művelet',
@@ -9302,7 +9292,7 @@ Az Ön ügyfélszolgálati csapata
             'Személyes időzóna kiválasztása. Az összes idő ettől az időzónától relatívan lesz megjelenítve.',
         'Select your preferred layout for the software.' => 'Az előnyben részesített elrendezés kiválasztása a szoftverhez.',
         'Select your preferred theme for OTRS.' => 'Az előnyben részesített téma kiválasztása az OTRS-hez.',
-        'Self' => '',
+        'Self' => 'Önmaga',
         'Send a unit test file' => 'Egységtesztfájl küldése',
         'Send new outgoing mail from this ticket' => 'Új kimenő levél küldése ebből a jegyből',
         'Send notifications to users.' => 'Értesítések küldése a felhasználóknak.',

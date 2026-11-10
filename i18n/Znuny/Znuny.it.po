@@ -4463,58 +4463,6 @@ msgid "package information"
 msgstr "informazioni sul pacchetto"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package installation requires a patch level update of Znuny."
-msgstr "L'installazione del pacchetto richiede un aggiornamento a livello di patch di Znuny."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package update requires a patch level update of Znuny."
-msgstr "L'aggiornamento del pacchetto richiede un aggiornamento a livello di patch di Znuny."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please note that your installed Znuny version is %s."
-msgstr "Si noti che la versione Znuny installata è %s."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "To install this package, you need to update Znuny to version %s or newer."
-msgstr "Per installare questo pacchetto, è necessario aggiornare Znuny alla versione %s o più nuova."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s or older."
-msgstr "Questo pacchetto può essere installato solo sulla versione Znuny %s o più vecchia."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Why should I keep Znuny up to date?"
-msgstr "Perché dovrei tenere aggiornato Znuny?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates about relevant security issues."
-msgstr "Riceverai aggiornamenti su importanti problemi di sicurezza."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates for all other relevant Znuny issues."
-msgstr "Riceverai aggiornamenti per tutti gli altri problemi Znuny pertinenti."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "How can I do a patch level update if I don’t have a contract?"
-msgstr "Come posso effettuare un aggiornamento a livello di patch se non ho un contratto?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please find all relevant information within the updating instructions at %s."
-msgstr "Tutte le informazioni pertinenti sono disponibili nelle istruzioni di aggiornamento all'indirizzo %s."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "In case you would have further questions we would be glad to answer them."
-msgstr "Nel caso dovessi avere altre domande, saremo felici di risponderti."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please visit our customer portal and file a request."
-msgstr "Per cortesia visita il nostro portale clienti e inoltra una richiesta."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Install Package"
 msgstr "Installa pacchetto"
 
@@ -14170,18 +14118,6 @@ msgstr "Moduli Perl"
 msgid "Not all required Perl modules are correctly installed."
 msgstr "Non tutti i moduli Perl necessari sono correttamente installati."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "Perl Modules Audit"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit did not report any known vulnerabilities in the installed Perl modules."
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Versione di Perl"
@@ -20963,7 +20899,7 @@ msgstr ""
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "Impossibile eseguire adesso l'attivazione, forse è in corso un'altra attivazione da parte di un altro agente. Provare nuovamente in seguito."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "Attiva"
 
@@ -25535,5 +25471,57 @@ msgstr ""
 
 #. SysConfig
 msgid "Self"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Package is incompatible."
+msgstr "Il pacchetto non è compatibile."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Your installed Znuny version %s does not support installing this package."
+msgstr "La versione di Znuny installata (%s) non consente l'installazione di questo pacchetto."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires an older version of Znuny."
+msgstr "Il pacchetto non può essere installato perché richiede una versione precedente di Znuny."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires a newer version of Znuny."
+msgstr "Il pacchetto non può essere installato perché richiede una versione più recente di Znuny."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "What to do:"
+msgstr "Cosa fare:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Se esiste una versione più recente di questo pacchetto che supporta Znuny %s, installala o aggiorna a quella."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If an older version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Se esiste una versione precedente di questo pacchetto che supporta Znuny %s, installala o aggiorna a quella."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
+msgstr "Se è necessario un aggiornamento di Znuny, consulta la documentazione per l'aggiornamento alla versione richiesta oppure contatta la tua organizzazione di supporto."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Azzera il responsabile di un ticket se il ticket viene spostato in un’altra coda."
+
+#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
+msgid "System was not able to calculate user Date in ZnunyTimeZone!"
+msgstr ""
+
+#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
+msgid "System was not able to calculate user DateTime in ZnunyTimeZone!"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "This setting is deprecated. Set ZnunyTimeZone instead."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
 msgstr ""
 

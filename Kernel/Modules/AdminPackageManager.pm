@@ -1164,9 +1164,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name               = $ParamObject->GetParam( Param => 'Name' )     || '';
-        my $Version            = $ParamObject->GetParam( Param => 'Version' )  || '';
-        my $KeepData           = $ParamObject->GetParam( Param => 'KeepData' ) || 1;
+        my $Name               = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version            = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $KeepData           = $ParamObject->GetParam( Param => 'KeepData' ) // 1;
         my $IntroUninstallPost = $ParamObject->GetParam( Param => 'IntroUninstallPost' )
             || '';
 
@@ -2000,13 +2000,15 @@ sub _InstallHandling {
             Data => {
                 %Param,
                 %Data,
-                Subaction              => $Self->{Subaction},
-                Type                   => 'InstallIncompatible',
-                Name                   => $Structure{Name}->{Content},
-                Version                => $Structure{Version}->{Content},
-                RequiredMinimumVersion => $Response{RequiredFrameworkMinimum},
-                RequiredMaximumVersion => $Response{RequiredFrameworkMaximum},
-                RequiredFramework      => $Response{RequiredFramework},
+                Subaction                     => $Self->{Subaction},
+                Type                          => 'InstallIncompatible',
+                Name                          => $Structure{Name}->{Content},
+                Version                       => $Structure{Version}->{Content},
+                RequiredMinimumVersion        => $Response{RequiredFrameworkMinimum},
+                RequiredMaximumVersion        => $Response{RequiredFrameworkMaximum},
+                RequiredFramework             => $Response{RequiredFramework},
+                RequiresNewerFrameworkVersion => $Response{RequiresNewerFrameworkVersion},
+                RequiresOlderFrameworkVersion => $Response{RequiresOlderFrameworkVersion},
             },
         );
 
@@ -2180,13 +2182,15 @@ sub _UpgradeHandling {
             Data => {
                 %Param,
                 %Data,
-                Subaction              => $Self->{Subaction},
-                Type                   => 'UpgradeIncompatible',
-                Name                   => $Structure{Name}->{Content},
-                Version                => $Structure{Version}->{Content},
-                RequiredMinimumVersion => $Response{RequiredFrameworkMinimum},
-                RequiredMaximumVersion => $Response{RequiredFrameworkMaximum},
-                RequiredFramework      => $Response{RequiredFramework},
+                Subaction                     => $Self->{Subaction},
+                Type                          => 'UpgradeIncompatible',
+                Name                          => $Structure{Name}->{Content},
+                Version                       => $Structure{Version}->{Content},
+                RequiredMinimumVersion        => $Response{RequiredFrameworkMinimum},
+                RequiredMaximumVersion        => $Response{RequiredFrameworkMaximum},
+                RequiredFramework             => $Response{RequiredFramework},
+                RequiresNewerFrameworkVersion => $Response{RequiresNewerFrameworkVersion},
+                RequiresOlderFrameworkVersion => $Response{RequiresOlderFrameworkVersion},
             },
         );
 

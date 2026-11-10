@@ -22,14 +22,12 @@ $Selenium->RunTest(
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-        # Do not check RichText and hide Fred.
-        for my $SySConfig (qw(Frontend::RichText Fred::Active)) {
-            $HelperObject->ConfigSettingChange(
-                Valid => 1,
-                Key   => $SySConfig,
-                Value => 0
-            );
-        }
+        # Use plain textarea instead of CKEditor 5.
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Frontend::RichText',
+            Value => 0,
+        );
 
         # Enable FormDrafts in AgentTicketActionCommon screens.
         for my $SySConfig (qw(Outbound Inbound)) {
@@ -52,6 +50,7 @@ $Selenium->RunTest(
             OwnerID      => 1,
             UserID       => 1,
         );
+
         $Self->True(
             $TicketID,
             "Ticket ID $TicketID is created",
@@ -181,9 +180,12 @@ $Selenium->RunTest(
                     );
                     sleep 1;
 
-                    # Upload a file.
-                    $Selenium->find_element( "#FileUpload", 'css' )
-                        ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                    # upload_file copies the sample onto the Selenium node. Chrome cannot
+                    # read /opt/znuny paths from the app container.
+                    my $Location = $Selenium->upload_file(
+                        $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf"
+                    );
+                    $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                     # Check if uploaded.
                     $Self->Is(
@@ -194,6 +196,21 @@ $Selenium->RunTest(
                         "Uploaded file correctly"
                     );
 
+                }
+                elsif ( $Test->{Fields}->{$Field}->{Type} eq 'RichText' ) {
+
+                    # CKEditor hides #RichText. clear() on that textarea is not interactable.
+                    $Selenium->WaitFor(
+                        JavaScript =>
+                            "return \$('.ck-editor__editable').contents().length >= 1;"
+                    );
+
+                    $Selenium->execute_script(
+                        "return window.editor.setData('$Test->{Fields}->{$Field}->{Value}');"
+                    );
+                    $Selenium->execute_script(
+                        "return window.editor.updateSourceElement();"
+                    );
                 }
                 else {
                     $Selenium->find_element( "#$Test->{Fields}->{$Field}->{ID}", 'css' )->clear();
@@ -248,10 +265,10 @@ $Selenium->RunTest(
             # Refresh screen.
             $Selenium->VerifiedRefresh();
 
-            # Click on test created FormDraft and switch window.
-            $Selenium->find_element(
-                "//a[contains(\@href, \'Action=AgentTicketPhone$Test->{Module};TicketID=$TicketID;LoadFormDraft=1' )]"
-            )->click();
+            # Open the saved FormDraft. Native click is intercepted by the lock/draft alert overlay.
+            $Selenium->execute_script(
+                "\$('a[href*=\"Action=AgentTicketPhone$Test->{Module};TicketID=$TicketID;LoadFormDraft=1\"]').get(0).click();"
+            );
 
             $Selenium->WaitFor( WindowCount => 2 );
             $Handles = $Selenium->get_window_handles();
@@ -323,9 +340,12 @@ $Selenium->RunTest(
                     );
                     sleep 1;
 
-                    # Upload a file.
-                    $Selenium->find_element( "#FileUpload", 'css' )
-                        ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
+                    # upload_file copies the sample onto the Selenium node. Chrome cannot
+                    # read /opt/znuny paths from the app container.
+                    my $Location = $Selenium->upload_file(
+                        $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc"
+                    );
+                    $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                     # Check if uploaded.
                     $Self->Is(
@@ -334,6 +354,28 @@ $Selenium->RunTest(
                         ),
                         1,
                         "Uploaded file correctly"
+                    );
+                }
+                elsif ( $Test->{Fields}->{$FieldValue}->{Type} eq 'RichText' ) {
+
+                    # CKEditor hides #RichText. clear() on that textarea is not interactable.
+                    $Selenium->WaitFor(
+                        JavaScript =>
+                            "return \$('.ck-editor__editable').contents().length >= 1;"
+                    );
+
+                    # CKEditor 5 wraps plain text in a paragraph.
+                    $Self->Is(
+                        $Selenium->execute_script('return window.editor.getData();'),
+                        '<p>' . $Test->{Fields}->{$FieldValue}->{Value} . '</p>',
+                        "Initial FormDraft value for $Test->{Module} field $FieldValue is correct"
+                    );
+
+                    $Selenium->execute_script(
+                        "return window.editor.setData('$Test->{Fields}->{$FieldValue}->{Update}');"
+                    );
+                    $Selenium->execute_script(
+                        "return window.editor.updateSourceElement();"
                     );
                 }
                 else {
@@ -358,10 +400,10 @@ $Selenium->RunTest(
             # Refresh screen.
             $Selenium->VerifiedRefresh();
 
-            # Click on test created FormDraft and switch window.
-            $Selenium->find_element(
-                "//a[contains(\@href, \'Action=AgentTicketPhone$Test->{Module};TicketID=$TicketID;LoadFormDraft=1' )]"
-            )->click();
+            # Open the saved FormDraft. Native click is intercepted by the lock/draft alert overlay.
+            $Selenium->execute_script(
+                "\$('a[href*=\"Action=AgentTicketPhone$Test->{Module};TicketID=$TicketID;LoadFormDraft=1\"]').get(0).click();"
+            );
 
             $Selenium->WaitFor( WindowCount => 2 );
             $Handles = $Selenium->get_window_handles();
@@ -394,6 +436,20 @@ $Selenium->RunTest(
                         "Uploaded file correctly"
                     );
                 }
+                elsif ( $Test->{Fields}->{$FieldValue}->{Type} eq 'RichText' ) {
+
+                    $Selenium->WaitFor(
+                        JavaScript =>
+                            "return \$('.ck-editor__editable').contents().length >= 1;"
+                    );
+
+                    # CKEditor 5 wraps plain text in a paragraph.
+                    $Self->Is(
+                        $Selenium->execute_script('return window.editor.getData();'),
+                        '<p>' . $Test->{Fields}->{$FieldValue}->{Update} . '</p>',
+                        "Updated FormDraft value for $Test->{Module} field $FieldValue is correct"
+                    );
+                }
                 else {
                     $Self->Is(
                         $Selenium->find_element( "#$Test->{Fields}->{$FieldValue}->{ID}", 'css' )->get_value(),
@@ -412,8 +468,9 @@ $Selenium->RunTest(
             # Refresh screen.
             $Selenium->VerifiedRefresh();
 
-            # Delete draft
-            $Selenium->find_element( ".FormDraftDelete", 'css' )->click();
+            # Delete draft.
+            # Native click misses the control: .table-icon-hover-md uses text-indent:-9999px.
+            $Selenium->execute_script("\$('a.FormDraftDelete').click();");
             $Selenium->WaitFor(
                 JavaScript =>
                     'return typeof($) === "function" && $("#DeleteConfirm").length;'
@@ -445,7 +502,6 @@ $Selenium->RunTest(
             "Ticket ID $TicketID is deleted"
         );
     }
-
 );
 
 1;

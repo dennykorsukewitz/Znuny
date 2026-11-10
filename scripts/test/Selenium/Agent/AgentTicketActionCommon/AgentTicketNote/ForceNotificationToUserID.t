@@ -61,6 +61,54 @@ $Selenium->RunTest(
             return;
         };
 
+        # Article widget is a collapsible card. Expand it and enable CreateArticle
+        # when the note is optional, otherwise subject/body are not submitted.
+        my $ExpandArticleWidget = sub {
+            my $IsCollapsed = $Selenium->execute_script(
+                "return \$('#WidgetArticle').hasClass('Collapsed') ? 1 : 0;"
+            );
+            if ( $IsCollapsed == 1 ) {
+                $Selenium->execute_script("\$('#WidgetArticle .cardTitleTrigger').click();");
+                $Selenium->WaitFor(
+                    JavaScript =>
+                        'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
+                );
+            }
+
+            $Selenium->execute_script(
+                "var Box = \$('#CreateArticle'); if (Box.is(':checkbox') && !Box.prop('checked')) { Box.prop('checked', true); }"
+            );
+
+            return;
+        };
+
+        # A ticket without articles treats the next note as NotificationNewTicket.
+        # That event notifies My Queues / My Services plus forced recipients, not the owner.
+        # Seed one article so the tested note raises NotificationAddNote (includes the owner).
+        my $SeedArticle = sub {
+            my (%Param) = @_;
+
+            my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+                ChannelName => 'Internal',
+            );
+
+            my $ArticleID = $ArticleBackendObject->ArticleCreate(
+                TicketID             => $Param{TicketID},
+                SenderType           => 'agent',
+                IsVisibleForCustomer => 0,
+                From                 => '"Seed" <seed@localhost>',
+                Subject              => 'Seed',
+                Body                 => 'Seed',
+                ContentType          => 'text/plain; charset=utf-8',
+                HistoryType          => 'AddNote',
+                HistoryComment       => 'Seed article',
+                NoAgentNotify        => 1,
+                UserID               => $Param{UserID},
+            );
+
+            return $ArticleID;
+        };
+
         # Make sure we start with a clean mail queue.
         $MailQueueClean->();
 
@@ -164,6 +212,14 @@ $Selenium->RunTest(
             UserID    => $UserID[2],
         );
 
+        $Self->True(
+            $SeedArticle->(
+                TicketID => $TicketID,
+                UserID   => $UserID[0],
+            ),
+            "Seed article created for ticket $TicketID",
+        );
+
         my $TestEmailObject = $Kernel::OM->Get('Kernel::System::Email::Test');
 
         $Success = $TestEmailObject->CleanUp();
@@ -187,8 +243,10 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length;'
+                'return typeof($) === "function" && $("#Compose").length && $("#InvolvedUserID").length;'
         );
+
+        $ExpandArticleWidget->();
 
         # Check page.
         for my $ID (
@@ -251,7 +309,7 @@ $Selenium->RunTest(
         );
         my %Article = $ArticleBackendObject->ArticleGet(
             TicketID  => $TicketID,
-            ArticleID => $Articles[0]->{ArticleID},
+            ArticleID => $Articles[-1]->{ArticleID},
         );
         my $ExpectedArticleTo
             = "\"$TestUser[1] $TestUser[1]\" <$TestUser[1]\@localunittest.com>, \"$TestUser[2] $TestUser[2]\" <$TestUser[2]\@localunittest.com>";
@@ -274,13 +332,7 @@ $Selenium->RunTest(
             Value   => $UserID[1],
         );
 
-        if ( $Selenium->execute_script("return \$('#WidgetArticle.Collapsed').length;") ) {
-            $Selenium->execute_script("\$('#WidgetArticle .Header a').click();");
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
-            );
-        }
+        $ExpandArticleWidget->();
 
         $Selenium->find_element( "#Subject",        'css' )->send_keys('Test');
         $Selenium->find_element( "#RichText",       'css' )->send_keys('Test');
@@ -468,6 +520,14 @@ $Selenium->RunTest(
             UserID   => $UserID[1],
         );
 
+        $Self->True(
+            $SeedArticle->(
+                TicketID => $NewTicketID,
+                UserID   => $UserID[1],
+            ),
+            "Seed article created for ticket $NewTicketID",
+        );
+
         # Make sure we start with a clean mail queue.
         $MailQueueClean->();
 
@@ -490,8 +550,10 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length;'
+                'return typeof($) === "function" && $("#Compose").length && $("#InvolvedUserID").length;'
         );
+
+        $ExpandArticleWidget->();
 
         # Select involved user, fill necessary fields and save the note.
         $Selenium->InputFieldValueSet(

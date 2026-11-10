@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.575926220384799;
+    $Self->{Completeness}        = 0.575931232091691;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1552,26 +1552,20 @@ sub Data {
         'Go to updating instructions' => 'Vai alle istruzioni di aggiornamento',
         'Go to znuny.org' => '',
         'package information' => 'informazioni sul pacchetto',
-        'Package installation requires a patch level update of Znuny.' =>
-            'L\'installazione del pacchetto richiede un aggiornamento a livello di patch di Znuny.',
-        'Package update requires a patch level update of Znuny.' => 'L\'aggiornamento del pacchetto richiede un aggiornamento a livello di patch di Znuny.',
-        'Please note that your installed Znuny version is %s.' => 'Si noti che la versione Znuny installata è %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Per installare questo pacchetto, è necessario aggiornare Znuny alla versione %s o più nuova.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Questo pacchetto può essere installato solo sulla versione Znuny %s o più vecchia.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'Perché dovrei tenere aggiornato Znuny?',
-        'You will receive updates about relevant security issues.' => 'Riceverai aggiornamenti su importanti problemi di sicurezza.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Riceverai aggiornamenti per tutti gli altri problemi Znuny pertinenti.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Come posso effettuare un aggiornamento a livello di patch se non ho un contratto?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Tutte le informazioni pertinenti sono disponibili nelle istruzioni di aggiornamento all\'indirizzo %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'Nel caso dovessi avere altre domande, saremo felici di risponderti.',
-        'Please visit our customer portal and file a request.' => 'Per cortesia visita il nostro portale clienti e inoltra una richiesta.',
+        'Package is incompatible.' => 'Il pacchetto non è compatibile.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'La versione di Znuny installata (%s) non consente l\'installazione di questo pacchetto.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Il pacchetto non può essere installato perché richiede una versione precedente di Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Il pacchetto non può essere installato perché richiede una versione più recente di Znuny.',
+        'What to do:' => 'Cosa fare:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Se esiste una versione più recente di questo pacchetto che supporta Znuny %s, installala o aggiorna a quella.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Se esiste una versione precedente di questo pacchetto che supporta Znuny %s, installala o aggiorna a quella.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Se è necessario un aggiornamento di Znuny, consulta la documentazione per l\'aggiornamento alla versione richiesta oppure contatta la tua organizzazione di supporto.',
         'Install Package' => 'Installa pacchetto',
         'Update Package' => 'Aggiorna pacchetto',
         'Package' => '',
@@ -3996,6 +3990,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Le informazioni di Process Management del database non sono sincronizzate con la configurazione di sistema, sincronizza tutti i processi.',
+        'Deploy' => 'Attiva',
         'Need ExampleProcesses!' => 'Un esempio Processo è necessario!',
         'Need ProcessID!' => 'Il ProcessID è necessario!',
         'Unknown Process %s!' => 'Processo %s sconosciuto!',
@@ -5307,13 +5302,6 @@ sub Data {
         'Perl Modules' => 'Moduli Perl',
         'Not all required Perl modules are correctly installed.' => 'Non tutti i moduli Perl necessari sono correttamente installati.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => '',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Versione di Perl',
 
@@ -5546,10 +5534,11 @@ sub Data {
         'Disabled' => '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => '',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
             '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
@@ -5989,12 +5978,12 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Questa impostazione è obsoleta. Impostare invece OTRSTimeZone.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Definire il giorno di inizio settimana per il selezionatore di date.',
@@ -6590,6 +6579,8 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Updates the ticket index accelerator.' => 'Carica il "Ticket Index Accelerator".',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Azzera e sblocca il proprietario di un ticket se il ticket viene spostato in un’altra coda.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Azzera il responsabile di un ticket se il ticket viene spostato in un’altra coda.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             '',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8497,7 +8488,6 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Impossibile eseguire adesso l\'attivazione, forse è in corso un\'altra attivazione da parte di un altro agente. Provare nuovamente in seguito.',
-        'Deploy' => 'Attiva',
         'The deployment is already running.' => 'L\'attivazione è già in esecuzione.',
         'Deployment successful. You\'re being redirected...' => 'Attivazione riuscita. Redirezione ad altra pagina...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

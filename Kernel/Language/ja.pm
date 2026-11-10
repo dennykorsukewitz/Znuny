@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.655430116075688;
+    $Self->{Completeness}        = 0.656638013371538;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1549,26 +1549,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => 'パッケージ情報',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => 'インストールされているZnunyのバージョンは%sです。',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'このパッケージをインストールするには、Znunyのバージョンを%s以上にアップデートする必要があります。',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'このパッケージはZnunyのバージョンが%sかそれより古い必要があります。',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'Znunyのバージョンを最新に保つことが必要な理由',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'パッケージに互換性がありません。',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'インストールされている Znuny のバージョン %s では、このパッケージのインストールはサポートされていません。',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'このパッケージは古いバージョンの Znuny を必要とするため、インストールできません。',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'このパッケージは新しいバージョンの Znuny を必要とするため、インストールできません。',
+        'What to do:' => '対処方法:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Znuny %s をサポートするこのパッケージの新しいバージョンがある場合は、代わりにそのバージョンをインストールまたはアップグレードしてください。',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Znuny %s をサポートするこのパッケージの古いバージョンがある場合は、代わりにそのバージョンをインストールまたはアップグレードしてください。',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Znuny の更新が必要な場合は、必要なバージョンへの更新に関するドキュメントを参照するか、サポート組織にお問い合わせください。',
         'Install Package' => 'パッケージをインストール',
         'Update Package' => 'パッケージを更新',
         'Package' => '',
@@ -3994,6 +3988,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'データベースから取得したプロセス管理情報はシステム設定と同期していません。全てのプロセスを同期させてください。',
+        'Deploy' => 'デプロイ',
         'Need ExampleProcesses!' => 'プロセス例が必要!',
         'Need ProcessID!' => 'ProcessIDが必要!',
         'Unknown Process %s!' => '',
@@ -5305,13 +5300,6 @@ sub Data {
         'Perl Modules' => 'Perl モジュール',
         'Not all required Perl modules are correctly installed.' => '必要な Perl モジュールが一部インストールされていません ',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => '',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl バージョン',
 
@@ -5544,11 +5532,12 @@ sub Data {
         'Disabled' => '無効',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'システムはユーザー日付をOTRSTimeZoneから算出できませんでした！',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            'システムはユーザー日時をOTRSTimeZoneから算出できませんでした！',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5983,12 +5972,12 @@ sub Data {
             '担当者が非アクティブのために「不在」としてマークされるまでの期間（分単位）を定義します（たとえば、「ログインユーザー」ウィジェット内またはチャット用）。',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '顧客が非アクティブのために「不在」としてマークされるまでの期間（分単位）を定義します（たとえば、「ログインユーザー」ウィジェット内またはチャット用）。',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => '',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '日付ピッカーにおける週の開始曜日を設定します。',
@@ -6584,6 +6573,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'チケット・インデックス・アクセラレイタのアップです',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'チケットの所有者を、チケットが移動された、または別のキューに移動した場合、リセットおよびアンロックします。',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'チケットが別のキューに移動された場合、チケットの責任者をリセットします。',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'ロックのアクションの後に、（現状から）異なるチケット状態を強制的に選択します。現在の状態をキーとして定義し、ロック・アクションの後に来る次の状態をコンテンツとして選択してください。',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -8500,7 +8491,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Please enter at least one search word to find anything.' => '何かを見つけるために少なくとも1つの検索単語を入力してください。',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => 'デプロイ',
         'The deployment is already running.' => 'デプロイメントはすでに実行中です。',
         'Deployment successful. You\'re being redirected...' => 'デプロイに成功しました。 ',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

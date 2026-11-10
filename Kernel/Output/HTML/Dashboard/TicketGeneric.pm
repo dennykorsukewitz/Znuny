@@ -1337,6 +1337,9 @@ sub Run {
             elsif ( $HeaderColumn eq 'CustomerUserID' ) {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User ID');
             }
+            elsif ( $HeaderColumn eq 'AccountedTime' ) {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Accounted time');
+            }
             else {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
             }
@@ -2105,6 +2108,9 @@ sub Run {
                         );
                     }
                     $DataValue = $CustomerCompanyData{CustomerCompanyName};
+                }
+                elsif ( $Column eq 'AccountedTime' ) {
+                    $DataValue = $TicketObject->TicketAccountedTimeGet( TicketID => $Ticket{TicketID} );
                 }
                 else {
                     $DataValue = $Ticket{$Column};

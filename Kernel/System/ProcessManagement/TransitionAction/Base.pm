@@ -614,9 +614,16 @@ sub _ReplaceTicketAttributes {
                         if ( $Attribute eq 'Body' && $IsArticleBodyCaller ) {
                             $Param{Config}->{ContentType} = 'text/html; charset="utf-8"';
 
-                            # get all attachments if there is more than one article tag
-                            $Param{Config}->{Attachment} ||= [];
-                            push @{ $Param{Config}->{Attachment} }, @{ $ArticleAttachments{$ArticleType} };
+                            # only keep attachments actually referenced inline in the body (e.g.
+                            # embedded images), regular file attachments must only be added via
+                            # Attachments/AttachmentIDs/AttachmentsReuse
+                            my @InlineAttachments = grep { ( $_->{Disposition} // '' ) eq 'inline' }
+                                @{ $ArticleAttachments{$ArticleType} };
+
+                            if (@InlineAttachments) {
+                                $Param{Config}->{Attachment} ||= [];
+                                push @{ $Param{Config}->{Attachment} }, @InlineAttachments;
+                            }
                         }
                         $Value = "<blockquoute>$Value</blockquoute>";
                         Encode::_utf8_on($Value);
@@ -783,14 +790,14 @@ sub _ReplaceAdditionalAttributes {
 
     my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
-    # start replacing of OTRS smart tags
+    # start replacing of OTRS/ZNUNY smart tags
     ATTRIBUTE:
     for my $Attribute ( sort keys %{ $Param{Config} } ) {
 
         next ATTRIBUTE if !$Param{Config}->{$Attribute};
         my $ConfigValue = $Param{Config}->{$Attribute};
 
-        if ( $ConfigValue =~ m{<OTRS_[A-Za-z0-9_]+(?:\[(?:.+?)\])?>}smxi ) {
+        if ( $ConfigValue =~ m{<(?:OTRS|ZNUNY)_[A-Za-z0-9_]+(?:\[(?:.+?)\])?>}smxi ) {
 
             if ($RichText) {
                 $ConfigValue = $HTMLUtilsObject->ToHTML(
@@ -809,9 +816,25 @@ sub _ReplaceAdditionalAttributes {
             );
 
             if ($RichText) {
+
+                # protect OTRS_TA_*/ZNUNY_TA_* placeholders (e.g. OTRS_TA_Template,
+                # ZNUNY_TA_Salutation, OTRS_TA_Signature) from being stripped by ToAscii below,
+                # since they are meant to survive this pass untouched (see the OTRS_TA dummy
+                # dynamic field in TemplateGenerator::_Replace) and get replaced later in
+                # ArticleSend/Run
+                my @TAPlaceholders;
+                $ConfigValue =~ s{(<|&lt;)((?:OTRS|ZNUNY)_TA_[A-Za-z0-9]+)(>|&gt;)}{
+                    push @TAPlaceholders, "$1$2$3";
+                    sprintf( 'TAPLACEHOLDER%d', $#TAPlaceholders );
+                }xmsige;
+
                 $ConfigValue = $HTMLUtilsObject->ToAscii(
                     String => $ConfigValue,
                 );
+
+                for my $Index ( 0 .. $#TAPlaceholders ) {
+                    $ConfigValue =~ s{TAPLACEHOLDER$Index}{$TAPlaceholders[$Index]}xms;
+                }
 
                 # For body, create a completed html doc for correct displaying.
                 if ( $Attribute eq 'Body' ) {

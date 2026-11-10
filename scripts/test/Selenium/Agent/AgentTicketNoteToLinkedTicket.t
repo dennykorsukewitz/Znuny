@@ -163,6 +163,10 @@ my $SeleniumTest = sub {
         WaitForAJAX => 0,
     );
 
+    # Keep the submit button away from the top edge of the viewport.
+    $SeleniumObject->execute_script(
+        "document.getElementById('submitRichText').scrollIntoView({block:'center', inline:'nearest'});"
+    );
     $SeleniumObject->find_element( '#submitRichText', 'css' )->click();
 
     my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
@@ -184,8 +188,11 @@ my $SeleniumTest = sub {
         push @ArticleBox, \%Article;
     }
 
+    my $ArticleBody = $ArticleBox[1]->{Body} // '';
+    chomp $ArticleBody;
+
     $Self->Is(
-        $ArticleBox[1]->{Body},
+        $ArticleBody,
         $NoteToLinkedTicket,
         "Article text is correct.",
     );

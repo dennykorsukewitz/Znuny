@@ -124,7 +124,7 @@ $Selenium->RunTest(
 
             # Wait for "Customer Information".
             $Selenium->WaitFor(
-                JavaScript => 'return typeof($) === "function" && $(".SidebarColumn fieldset .Value").length'
+                JavaScript => 'return typeof($) === "function" && $(".sectionSidebar fieldset .Value").length'
             );
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;' );
 
@@ -135,6 +135,25 @@ $Selenium->RunTest(
 
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;' );
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#Dest").val() === "2||Raw";' );
+
+            # Dest change posts FormUpdate, which replaces TypeID. Wait until that request is idle.
+            # Apache keeps Ticket::Type enabled, so an empty type blocks submit.
+            # Do not trigger change here: that update would replace the select again with an empty selection.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $.active === 0 && !$(".AJAXLoader:visible").length;'
+            );
+            $Selenium->execute_script(
+                "if (\$('#TypeID').length && !\$('#TypeID').val()) {"
+                    . "\$('#TypeID').val(\$('#TypeID option').filter(function () { return \$(this).text().trim() == 'Unclassified'; }).val())"
+                    . ".trigger('redraw.InputField');"
+                    . "\$('#TypeID_Search').blur();"
+                    . "}"
+            );
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && (!$("#TypeID").length || $("#TypeID").val());'
+            );
 
             $Selenium->find_element( "#Subject",  'css' )->send_keys($TicketSubject);
             $Selenium->find_element( "#RichText", 'css' )->send_keys($TicketBody);

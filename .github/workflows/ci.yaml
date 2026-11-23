@@ -219,14 +219,6 @@ jobs:
     name: UnitTest:MySQL
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: [
-      ZnunyCodePolicy,
-      Contributors,
-      Database-Schema,
-      Database-InitialInsert,
-      Migration,
-      RPMSpec,
-    ]
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -262,7 +254,6 @@ jobs:
     name: Selenium:Base
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: UnitTest-MySQL
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -314,7 +305,6 @@ jobs:
     name: Selenium:Admin
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: UnitTest-MySQL
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -366,7 +356,6 @@ jobs:
     name: Selenium:Agent
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: UnitTest-MySQL
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -418,7 +407,6 @@ jobs:
     name: Selenium:Customer
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: UnitTest-MySQL
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -470,7 +458,6 @@ jobs:
     name: Selenium:JavaScript
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: UnitTest-MySQL
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -522,7 +509,6 @@ jobs:
     name: Selenium:Output
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: UnitTest-MySQL
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -574,7 +560,6 @@ jobs:
     name: Selenium:SysConfig
     runs-on: ubuntu-latest
     container: debian:12-slim
-    needs: UnitTest-MySQL
     env:
       DB: mysql
       MYSQL_USER: "znuny"
